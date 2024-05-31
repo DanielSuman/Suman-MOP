@@ -32,15 +32,25 @@ return array (
       0 => '/home/daniel/projekty/quickstart/quickstart/app/UI/Home/HomePresenter.php',
       1 => 1717141961,
     ),
+    'App\\UI\\Game\\GamePresenter' => 
+    array (
+      0 => '/home/daniel/projekty/quickstart/quickstart/app/UI/Game/GamePresenter.php',
+      1 => 1717148254,
+    ),
     'App\\UI\\Post\\PostPresenter' => 
     array (
       0 => '/home/daniel/projekty/quickstart/quickstart/app/UI/Post/PostPresenter.php',
-      1 => 1717142261,
+      1 => 1717147564,
     ),
     'App\\Bootstrap' => 
     array (
       0 => '/home/daniel/projekty/quickstart/quickstart/app/Bootstrap.php',
       1 => 1717136821,
+    ),
+    'App\\Model\\GameFacade' => 
+    array (
+      0 => '/home/daniel/projekty/quickstart/quickstart/app/Model/GameFacade.php',
+      1 => 1717145715,
     ),
     'App\\Model\\PostFacade' => 
     array (
@@ -50,7 +60,7 @@ return array (
     'App\\Core\\RouterFactory' => 
     array (
       0 => '/home/daniel/projekty/quickstart/quickstart/app/Core/RouterFactory.php',
-      1 => 1715655818,
+      1 => 1717146856,
     ),
   ),
   1 => 
