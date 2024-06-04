@@ -177,7 +177,7 @@ class Container_cd1df444e8 extends Nette\DI\Container
 
 	public function createServiceApplication__2(): App\UI\Edit\EditPresenter
 	{
-		$service = new App\UI\Edit\EditPresenter($this->getService('database.default.explorer'));
+		$service = new App\UI\Edit\EditPresenter($this->getService('03'));
 		$service->injectPrimary(
 			$this->getService('http.request'),
 			$this->getService('http.response'),

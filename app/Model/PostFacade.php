@@ -10,13 +10,51 @@ final class PostFacade
         private Nette\Database\Explorer $database,
     ) {
     }
-
-    public function getPublicArticles()
+    /*         $post = $this->database
+                ->table('posts')
+                ->get($postId);
+            $post->update($data);
+        } else {
+            $post = $this->database
+                ->table('posts')
+                ->insert($data); */
+    public function insertPost($data)
     {
-        return $this->database
+        $post = $this->database
             ->table('posts')
+            ->insert($data);
+
+        return $post;
+    }
+    public function editPost($postId, $data)
+    {
+        $post = $this->database
+            ->table('posts')
+            ->get($postId);
+        $post->update($data);
+        return $post;
+    }
+    public function getPublicArticles(int $limit, int $offset): Nette\Database\ResultSet
+    {
+        return $this->database->query(
+            '
+        SELECT * FROM posts
+        WHERE created_at < ?
+        ORDER BY created_at DESC
+        LIMIT ?
+        OFFSET ?',
+            new \DateTime,
+            $limit,
+            $offset,
+        );
+        /*    ->table('posts')
             ->where('created_at < ', new \DateTime)
-            ->order('created_at DESC');
+            ->order('created_at DESC'); */
+    }
+
+    public function getPublicArticlesCount(): int
+    {
+        return $this->database->fetchField('SELECT COUNT(*) FROM posts WHERE created_at < ?', new \DateTime);
     }
 
     public function getPostById(int $id)
@@ -26,5 +64,4 @@ final class PostFacade
             ->get($id);
         return $post;
     }
-
 }

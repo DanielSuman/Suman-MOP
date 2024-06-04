@@ -3,6 +3,7 @@
 namespace App\UI\Edit;
 
 use Nette;
+use App\Model\PostFacade;
 use Nette\Application\UI\Form;
 
 final class EditPresenter extends Nette\Application\UI\Presenter
@@ -18,17 +19,21 @@ final class EditPresenter extends Nette\Application\UI\Presenter
     }
 
     public function __construct(
-        private Nette\Database\Explorer $database,
+        private PostFacade $facade,
     ) {
     }
 
     protected function createComponentPostForm(): Form
     {
         $form = new Form;
+
         $form->addText('title', 'Titulek:')
             ->setRequired();
         $form->addTextArea('content', 'Obsah:')
             ->setRequired();
+        $form->addUpload('image', 'Soubor')
+            ->setRequired()
+            ->addRule(Form::IMAGE, 'Thumbnail must be JPEG, PNG or GIF');
 
         $form->addSubmit('send', 'Uložit a publikovat');
         $form->onSuccess[] = $this->postFormSucceeded(...);
@@ -36,19 +41,23 @@ final class EditPresenter extends Nette\Application\UI\Presenter
         return $form;
     }
 
-    private function postFormSucceeded(array $data): void
+    private function postFormSucceeded($form, $data): void
     {
         $postId = $this->getParameter('postId');
 
+        if (filesize($data->image) > 0) {
+            if ($data->image->isOk()) {
+                $data->image->move('upload/' . 'posts/' . $postId . '/' . $data->image->getSanitizedName());
+                $data['image'] = ('upload/' . 'posts/' . $postId . '/' . $data->image->getSanitizedName());
+            } else {
+                $this->flashMessage('File was not added', 'failed');
+            }
+        }
+
         if ($postId) {
-            $post = $this->database
-                ->table('posts')
-                ->get($postId);
-            $post->update($data);
+            $post = $this->facade->editPost($postId, (array) $data);
         } else {
-            $post = $this->database
-                ->table('posts')
-                ->insert($data);
+            $post = $this->facade->insertPost((array) $data);
         }
 
         $this->flashMessage('Příspěvek byl úspěšně publikován.', 'success');
@@ -57,9 +66,7 @@ final class EditPresenter extends Nette\Application\UI\Presenter
 
     public function renderEdit(int $postId): void
     {
-        $post = $this->database
-            ->table('posts')
-            ->get($postId);
+        $post = $this->facade->getPostById($postId);
 
         if (!$post) {
             $this->error('Post not found');

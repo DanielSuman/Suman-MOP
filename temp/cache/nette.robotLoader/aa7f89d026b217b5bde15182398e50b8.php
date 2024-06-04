@@ -10,7 +10,7 @@ return array (
     'App\\UI\\Edit\\EditPresenter' => 
     array (
       0 => '/home/daniel/projekty/quickstart/quickstart/app/UI/Edit/EditPresenter.php',
-      1 => 1717144120,
+      1 => 1717486231,
     ),
     'App\\UI\\Error\\Error4xx\\Error4xxPresenter' => 
     array (
@@ -30,7 +30,7 @@ return array (
     'App\\UI\\Home\\HomePresenter' => 
     array (
       0 => '/home/daniel/projekty/quickstart/quickstart/app/UI/Home/HomePresenter.php',
-      1 => 1717141961,
+      1 => 1717485014,
     ),
     'App\\UI\\Game\\GamePresenter' => 
     array (
@@ -40,7 +40,7 @@ return array (
     'App\\UI\\Post\\PostPresenter' => 
     array (
       0 => '/home/daniel/projekty/quickstart/quickstart/app/UI/Post/PostPresenter.php',
-      1 => 1717147564,
+      1 => 1717149474,
     ),
     'App\\Bootstrap' => 
     array (
@@ -55,7 +55,7 @@ return array (
     'App\\Model\\PostFacade' => 
     array (
       0 => '/home/daniel/projekty/quickstart/quickstart/app/Model/PostFacade.php',
-      1 => 1717142151,
+      1 => 1717486407,
     ),
     'App\\Core\\RouterFactory' => 
     array (
@@ -75,7 +75,7 @@ return array (
     'App\\UI\\Edit\\EditEditTemplate' => 3,
     'App\\UI\\Sign\\SignInTemplate' => 3,
     'App\\UI\\Sign\\SignTemplate' => 3,
-    'App\\UI\\Sign\\SignOutTemplate' => 2,
+    'App\\UI\\Sign\\SignOutTemplate' => 3,
     'App\\UI\\Home\\HomeGamesTemplate' => 3,
     'App\\UI\\Game\\GameDefaultTemplate' => 3,
     'App\\UI\\Game\\GameTemplate' => 3,

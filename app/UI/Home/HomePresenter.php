@@ -15,14 +15,25 @@ final class HomePresenter extends Nette\Application\UI\Presenter
     ) {
     }
 
-    public function renderDefault(): void
+    public function renderDefault(int $page = 1): void
     {
-        $posts = $this->facade
-            ->getPublicArticles()
-            ->limit(5);
 
-        bdump($posts);
+        // Zjistíme si celkový počet publikovaných článků
+		$postsCount = $this->facade->getPublicArticlesCount();
 
-        $this->template->posts = $posts;
+		// Vyrobíme si instanci Paginatoru a nastavíme jej
+		$paginator = new Nette\Utils\Paginator;
+		$paginator->setItemCount($postsCount); // celkový počet článků
+		$paginator->setItemsPerPage(5); // počet položek na stránce
+		$paginator->setPage($page); // číslo aktuální stránky
+
+		// Z databáze si vytáhneme omezenou množinu článků podle výpočtu Paginatoru
+		$posts = $this->facade->getPublicArticles($paginator->getLength(), $paginator->getOffset());
+
+		// kterou předáme do šablony
+		$this->template->posts = $posts;
+		// a také samotný Paginator pro zobrazení možností stránkování
+		$this->template->paginator = $paginator;
+
     }
 }

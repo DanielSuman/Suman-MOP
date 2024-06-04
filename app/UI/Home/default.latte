@@ -2,14 +2,33 @@
 
 {block content}
 <h1>Blog</h1>
+<div class="pagination">
+	{if !$paginator->isFirst()}
+		<a n:href="default, 1">První</a>
+		&nbsp;|&nbsp;
+		<a n:href="default, $paginator->page-1">Předchozí</a>
+		&nbsp;|&nbsp;
+	{/if}
 
+	Stránka {$paginator->getPage()} z {$paginator->getPageCount()}
+
+	{if !$paginator->isLast()}
+		&nbsp;|&nbsp;
+		<a n:href="default, $paginator->getPage() + 1">Další</a>
+		&nbsp;|&nbsp;
+		<a n:href="default, $paginator->getPageCount()">Poslední</a>
+	{/if}
+</div>
 {foreach $posts as $post}
 	<div class="post">
 
 		<h2><a href="{link Post:show $post->id}">{$post->title}</a></h2>
 
+		<img src="{$basePath}/{$post->image}" alt="Obrázek k článku {$post->title}">
+		
 		<div>{$post->content|truncate:256}</div>
 
         <div class="date">{$post->created_at|date:'F j, Y'}</div>
 	</div>
 	{/foreach}
+
