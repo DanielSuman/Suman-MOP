@@ -58,34 +58,37 @@ final class Template_9af097fb56 extends Latte\Runtime\Template
 	<ul class="navig">
 		<li><a href="';
 		echo LR\Filters::escapeHtmlAttr($this->global->uiControl->link('Home:')) /* line 14 */;
-		echo '">Články</a></li>
+		echo '">Articles</a></li>
 		<li><a href="';
 		echo LR\Filters::escapeHtmlAttr($this->global->uiControl->link('Game:')) /* line 15 */;
-		echo '">Hry</a></li>
+		echo '">Games</a></li>
 ';
 		if ($user->isLoggedIn()) /* line 16 */ {
 			echo '			<li><a href="';
 			echo LR\Filters::escapeHtmlAttr($this->global->uiControl->link('Sign:out')) /* line 17 */;
-			echo '">Odhlásit</a></li>
+			echo '">Sign-out</a></li>
 ';
 		} else /* line 18 */ {
 			echo '			<li><a href="';
 			echo LR\Filters::escapeHtmlAttr($this->global->uiControl->link('Sign:in')) /* line 19 */;
-			echo '">Přihlásit</a></li>
+			echo '">Sign-in</a></li>
+			<li><a href="';
+			echo LR\Filters::escapeHtmlAttr($this->global->uiControl->link('Sign:up')) /* line 20 */;
+			echo '">Sign-Up</a></li>
 ';
 		}
 		echo '	</ul>
 
 ';
-		if ($user->isLoggedIn()) /* line 23 */ {
+		if ($user->isLoggedIn()) /* line 24 */ {
 			echo '	<a href="';
-			echo LR\Filters::escapeHtmlAttr($this->global->uiControl->link('Edit:create')) /* line 23 */;
+			echo LR\Filters::escapeHtmlAttr($this->global->uiControl->link('Edit:create')) /* line 24 */;
 			echo '">Vytvořit příspěvek</a>
 ';
 		}
-		$this->renderBlock('content', [], 'html') /* line 24 */;
+		$this->renderBlock('content', [], 'html') /* line 25 */;
 		echo "\n";
-		$this->renderBlock('scripts', get_defined_vars()) /* line 26 */;
+		$this->renderBlock('scripts', get_defined_vars()) /* line 27 */;
 		echo '</body>
 </html>
 ';
@@ -105,7 +108,7 @@ final class Template_9af097fb56 extends Latte\Runtime\Template
 	}
 
 
-	/** {block scripts} on line 26 */
+	/** {block scripts} on line 27 */
 	public function blockScripts(array $ʟ_args): void
 	{
 		echo '	<script src="https://unpkg.com/nette-forms@3/src/assets/netteForms.js"></script>

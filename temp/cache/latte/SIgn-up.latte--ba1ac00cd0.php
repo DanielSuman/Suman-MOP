@@ -4,10 +4,10 @@ declare(strict_types=1);
 
 use Latte\Runtime as LR;
 
-/** source: /home/daniel/projekty/quickstart/quickstart/app/UI/SIgn/in.latte */
-final class Template_b086882976 extends Latte\Runtime\Template
+/** source: /home/daniel/projekty/quickstart/quickstart/app/UI/SIgn/up.latte */
+final class Template_ba1ac00cd0 extends Latte\Runtime\Template
 {
-	public const Source = '/home/daniel/projekty/quickstart/quickstart/app/UI/SIgn/in.latte';
+	public const Source = '/home/daniel/projekty/quickstart/quickstart/app/UI/SIgn/up.latte';
 
 	public const Blocks = [
 		['content' => 'blockContent', 'title' => 'blockTitle'],
@@ -36,11 +36,11 @@ final class Template_b086882976 extends Latte\Runtime\Template
 
 		$this->renderBlock('title', get_defined_vars()) /* line 4 */;
 		echo "\n";
-		$this->createTemplate('../@form.latte', ['name' => 'signInForm'] + $this->params, 'include')->renderToContentType('html') /* line 7 */;
+		$this->createTemplate('../@form.latte', ['name' => 'signUpForm'] + $this->params, 'include')->renderToContentType('html') /* line 7 */;
 		echo '
 <p class="text-center"><a href="';
-		echo LR\Filters::escapeHtmlAttr($this->global->uiControl->link('up')) /* line 9 */;
-		echo '">Don\'t have an account yet? Sign up.</a></p>
+		echo LR\Filters::escapeHtmlAttr($this->global->uiControl->link('in')) /* line 9 */;
+		echo '">Already have an account? Log in.</a></p>
 ';
 	}
 
@@ -48,7 +48,7 @@ final class Template_b086882976 extends Latte\Runtime\Template
 	/** n:block="title" on line 4 */
 	public function blockTitle(array $ʟ_args): void
 	{
-		echo '<h1>Sign In</h1>
+		echo '<h1>Sign Up</h1>
 ';
 	}
 }

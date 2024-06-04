@@ -4,19 +4,22 @@ namespace App\UI\Edit;
 
 use Nette;
 use App\Model\PostFacade;
+use App\UI\Dashboard\RequireLoggedUser;
 use Nette\Application\UI\Form;
 
 final class EditPresenter extends Nette\Application\UI\Presenter
 {
 
-    public function startup(): void
+    use RequireLoggedUser;
+
+    /*    public function startup(): void
     {
         parent::startup();
 
         if (!$this->getUser()->isLoggedIn()) {
             $this->redirect('Sign:in');
         }
-    }
+    } */
 
     public function __construct(
         private PostFacade $facade,

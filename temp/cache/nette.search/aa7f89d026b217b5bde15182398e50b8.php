@@ -5,12 +5,12 @@ return array (
     'App\\UI\\Sign\\SignPresenter' => 
     array (
       0 => '/home/daniel/projekty/quickstart/quickstart/app/UI/SIgn/SignPresenter.php',
-      1 => 1717144317,
+      1 => 1717495535,
     ),
     'App\\UI\\Edit\\EditPresenter' => 
     array (
       0 => '/home/daniel/projekty/quickstart/quickstart/app/UI/Edit/EditPresenter.php',
-      1 => 1717486231,
+      1 => 1717496725,
     ),
     'App\\UI\\Error\\Error4xx\\Error4xxPresenter' => 
     array (
@@ -37,10 +37,35 @@ return array (
       0 => '/home/daniel/projekty/quickstart/quickstart/app/UI/Game/GamePresenter.php',
       1 => 1717148362,
     ),
+    'App\\UI\\Dashboard\\DashboardPresenter' => 
+    array (
+      0 => '/home/daniel/projekty/quickstart/quickstart/app/UI/Dashboard/DashboardPresenter.php',
+      1 => 1717495576,
+    ),
+    'App\\UI\\Dashboard\\RequireLoggedUser' => 
+    array (
+      0 => '/home/daniel/projekty/quickstart/quickstart/app/UI/Dashboard/RequireLoggedUser.php',
+      1 => 1717495925,
+    ),
     'App\\UI\\Post\\PostPresenter' => 
     array (
       0 => '/home/daniel/projekty/quickstart/quickstart/app/UI/Post/PostPresenter.php',
       1 => 1717149474,
+    ),
+    'App\\Forms\\SignInFormFactory' => 
+    array (
+      0 => '/home/daniel/projekty/quickstart/quickstart/app/Forms/SignInFormFactory.php',
+      1 => 1717495093,
+    ),
+    'App\\Forms\\SignUpFormFactory' => 
+    array (
+      0 => '/home/daniel/projekty/quickstart/quickstart/app/Forms/SignUpFormFactory.php',
+      1 => 1717495093,
+    ),
+    'App\\Forms\\FormFactory' => 
+    array (
+      0 => '/home/daniel/projekty/quickstart/quickstart/app/Forms/FormFactory.php',
+      1 => 1717495093,
     ),
     'App\\Bootstrap' => 
     array (
@@ -57,10 +82,20 @@ return array (
       0 => '/home/daniel/projekty/quickstart/quickstart/app/Model/PostFacade.php',
       1 => 1717486407,
     ),
+    'App\\Model\\UserFacade' => 
+    array (
+      0 => '/home/daniel/projekty/quickstart/quickstart/app/Model/UserFacade.php',
+      1 => 1717494969,
+    ),
+    'App\\Model\\DuplicateNameException' => 
+    array (
+      0 => '/home/daniel/projekty/quickstart/quickstart/app/Model/UserFacade.php',
+      1 => 1717494969,
+    ),
     'App\\Core\\RouterFactory' => 
     array (
       0 => '/home/daniel/projekty/quickstart/quickstart/app/Core/RouterFactory.php',
-      1 => 1717146856,
+      1 => 1717495061,
     ),
   ),
   1 => 
