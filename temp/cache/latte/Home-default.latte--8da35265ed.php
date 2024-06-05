@@ -53,18 +53,18 @@ final class Template_8da35265ed extends Latte\Runtime\Template
 		if (!$paginator->isFirst()) /* line 6 */ {
 			echo '		<a href="';
 			echo LR\Filters::escapeHtmlAttr($this->global->uiControl->link('default', [1])) /* line 7 */;
-			echo '">První</a>
+			echo '">First</a>
 		&nbsp;|&nbsp;
 		<a href="';
 			echo LR\Filters::escapeHtmlAttr($this->global->uiControl->link('default', [$paginator->page - 1])) /* line 9 */;
-			echo '">Předchozí</a>
+			echo '">Previous</a>
 		&nbsp;|&nbsp;
 ';
 		}
 		echo '
-	Stránka ';
+	Page ';
 		echo LR\Filters::escapeHtmlText($paginator->getPage()) /* line 13 */;
-		echo ' z ';
+		echo ' of ';
 		echo LR\Filters::escapeHtmlText($paginator->getPageCount()) /* line 13 */;
 		echo '
 
@@ -73,11 +73,11 @@ final class Template_8da35265ed extends Latte\Runtime\Template
 			echo '		&nbsp;|&nbsp;
 		<a href="';
 			echo LR\Filters::escapeHtmlAttr($this->global->uiControl->link('default', [$paginator->getPage() + 1])) /* line 17 */;
-			echo '">Další</a>
+			echo '">Next</a>
 		&nbsp;|&nbsp;
 		<a href="';
 			echo LR\Filters::escapeHtmlAttr($this->global->uiControl->link('default', [$paginator->getPageCount()])) /* line 19 */;
-			echo '">Poslední</a>
+			echo '">Last</a>
 ';
 		}
 		echo '</div>

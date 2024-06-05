@@ -4,7 +4,6 @@ namespace App\UI\Post;
 
 use Nette;
 use App\Model\PostFacade;
-use App\Model\GameFacade;
 use Nette\Application\UI\Form;
 
 final class PostPresenter extends Nette\Application\UI\Presenter

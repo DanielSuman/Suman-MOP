@@ -11,12 +11,25 @@ final class ModFacade
     ) {
     }
 
-    public function getPublishedMods()
+    public function getPublishedMods(int $limit, int $offset): Nette\Database\ResultSet
     {
-        return $this->database
-            ->table('mods')
-            ->where('created_at < ', new \DateTime)
-            ->order('created_at DESC');
+        return $this->database->query(
+            '
+        SELECT * FROM mods
+        WHERE created_at < ?
+        ORDER BY created_at DESC
+        LIMIT ?
+        OFFSET ?',
+            new \DateTime,
+            $limit,
+            $offset,
+        );
+
+    }
+
+    public function getPublishedModsByCount(): int
+    {
+        return $this->database->fetchField('SELECT COUNT(*) FROM mods WHERE created_at < ?', new \DateTime);
     }
 
     public function getModById(int $id)
