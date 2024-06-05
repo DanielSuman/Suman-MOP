@@ -56,42 +56,38 @@ final class Template_9af097fb56 extends Latte\Runtime\Template
 
 		echo '
 	<ul class="navig">
-		<li><a href="';
-		echo LR\Filters::escapeHtmlAttr($this->global->uiControl->link('Home:')) /* line 14 */;
-		echo '">Articles</a></li>
-		<li><a href="';
-		echo LR\Filters::escapeHtmlAttr($this->global->uiControl->link('Game:')) /* line 15 */;
-		echo '">Games</a></li>
-		<li><a href="';
-		echo LR\Filters::escapeHtmlAttr($this->global->uiControl->link('Mod:')) /* line 16 */;
-		echo '">Mods</a></li>
 ';
-		if ($user->isLoggedIn()) /* line 17 */ {
-			echo '			<li><a href="';
-			echo LR\Filters::escapeHtmlAttr($this->global->uiControl->link('Sign:out')) /* line 18 */;
+		if ($user->isLoggedIn()) /* line 14 */ {
+			echo '			<li>Logged in as <strong>';
+			echo LR\Filters::escapeHtmlText($user->getIdentity()->nickname) /* line 15 */;
+			echo '</strong> | <a href="';
+			echo LR\Filters::escapeHtmlAttr($this->global->uiControl->link('Sign:out')) /* line 15 */;
 			echo '">Sign-out</a></li>
 ';
-		} else /* line 19 */ {
-			echo '			<li><a href="';
-			echo LR\Filters::escapeHtmlAttr($this->global->uiControl->link('Sign:in')) /* line 20 */;
-			echo '">Sign-in</a></li>
-			<li><a href="';
-			echo LR\Filters::escapeHtmlAttr($this->global->uiControl->link('Sign:up')) /* line 21 */;
+		} else /* line 16 */ {
+			echo '			<li>No registered user detected | <a href="';
+			echo LR\Filters::escapeHtmlAttr($this->global->uiControl->link('Sign:in')) /* line 17 */;
+			echo '">Sign-In</a> | <a href="';
+			echo LR\Filters::escapeHtmlAttr($this->global->uiControl->link('Sign:up')) /* line 17 */;
 			echo '">Sign-Up</a></li>
 ';
 		}
-		echo '	</ul>
+		echo '		<li><a href="';
+		echo LR\Filters::escapeHtmlAttr($this->global->uiControl->link('Home:')) /* line 19 */;
+		echo '">Articles</a></li>
+		<li><a href="';
+		echo LR\Filters::escapeHtmlAttr($this->global->uiControl->link('Game:')) /* line 20 */;
+		echo '">Games</a></li>
+		<li><a href="';
+		echo LR\Filters::escapeHtmlAttr($this->global->uiControl->link('Mod:')) /* line 21 */;
+		echo '">Mods</a></li>
+	</ul>
 
+	
 ';
-		if ($user->isLoggedIn()) /* line 25 */ {
-			echo '	<a href="';
-			echo LR\Filters::escapeHtmlAttr($this->global->uiControl->link('Edit:create')) /* line 25 */;
-			echo '">Vytvořit příspěvek</a>
-';
-		}
-		$this->renderBlock('content', [], 'html') /* line 26 */;
+		$this->renderBlock('content', [], 'html') /* line 25 */;
 		echo "\n";
-		$this->renderBlock('scripts', get_defined_vars()) /* line 28 */;
+		$this->renderBlock('scripts', get_defined_vars()) /* line 27 */;
 		echo '</body>
 </html>
 ';
@@ -111,7 +107,7 @@ final class Template_9af097fb56 extends Latte\Runtime\Template
 	}
 
 
-	/** {block scripts} on line 28 */
+	/** {block scripts} on line 27 */
 	public function blockScripts(array $ʟ_args): void
 	{
 		echo '	<script src="https://unpkg.com/nette-forms@3/src/assets/netteForms.js"></script>

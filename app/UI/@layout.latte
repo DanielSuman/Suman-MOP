@@ -11,18 +11,17 @@
 	<div n:foreach="$flashes as $flash" n:class="flash, $flash->type">{$flash->message}</div>
 
 	<ul class="navig">
+		{if $user->isLoggedIn()}
+			<li>Logged in as <strong>{$user->getIdentity()->nickname}</strong> | <a n:href="Sign:out">Sign-out</a></li>
+		{else}
+			<li>No registered user detected | <a n:href="Sign:in">Sign-In</a> | <a n:href="Sign:up">Sign-Up</a></li>
+		{/if}
 		<li><a n:href="Home:">Articles</a></li>
 		<li><a n:href="Game:">Games</a></li>
 		<li><a n:href="Mod:">Mods</a></li>
-		{if $user->isLoggedIn()}
-			<li><a n:href="Sign:out">Sign-out</a></li>
-		{else}
-			<li><a n:href="Sign:in">Sign-in</a></li>
-			<li><a n:href="Sign:up">Sign-Up</a></li>
-		{/if}
 	</ul>
 
-	<a n:href="Edit:create" n:if="$user->isLoggedIn()">Vytvořit příspěvek</a>
+	
 	{include content}
 
 	{block scripts}

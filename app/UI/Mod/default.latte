@@ -26,6 +26,10 @@
 
 		<h2><a href="{link Mod:show $mod->id}">{$mod->name}</a></h2>
 
+		{if $mod->image}
+    		<img src="{$basePath}/{$mod->image}" alt="Thumbnail">
+		{/if}
+
 		<div>{$mod->description|truncate:256}</div>
 
         <div class="date">{$mod->created_at|date:'F j, Y'}</div>

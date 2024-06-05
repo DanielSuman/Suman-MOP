@@ -41,14 +41,37 @@ final class Template_1629afb139 extends Latte\Runtime\Template
 
 ';
 		$this->renderBlock('name', get_defined_vars()) /* line 5 */;
+		echo "\n";
+		if ($mod->image) /* line 7 */ {
+			echo '    <img src="';
+			echo LR\Filters::escapeHtmlAttr(LR\Filters::safeUrl($basePath)) /* line 8 */;
+			echo '/';
+			echo LR\Filters::escapeHtmlAttr($mod->image) /* line 8 */;
+			echo '" alt="Thumbnail">
+';
+		}
 		echo '
 <div class="mod">';
-		echo LR\Filters::escapeHtmlText($mod->description) /* line 7 */;
+		echo LR\Filters::escapeHtmlText($mod->description) /* line 11 */;
 		echo '</div>
 
-<div class="date">';
-		echo LR\Filters::escapeHtmlText(($this->filters->date)($mod->created_at, 'F j, Y')) /* line 9 */;
-		echo '</div>';
+';
+		if ($mod->vidprev) /* line 13 */ {
+			echo '    <h2>Preview video:</h2>
+    <iframe width="560" height="315" src="';
+			echo LR\Filters::escapeHtmlAttr(LR\Filters::safeUrl($mod->vidprev)) /* line 15 */;
+			echo '" frameborder="0" allowfullscreen></iframe>
+';
+		}
+		echo '
+
+<div class="date">Created on ';
+		echo LR\Filters::escapeHtmlText(($this->filters->date)($mod->created_at, 'D. F j, Y')) /* line 19 */;
+		echo '</div>
+
+
+
+';
 	}
 
 

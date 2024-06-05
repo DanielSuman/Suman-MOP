@@ -93,12 +93,22 @@ final class Template_00c8f58795 extends Latte\Runtime\Template
 			echo LR\Filters::escapeHtmlText($mod->name) /* line 27 */;
 			echo '</a></h2>
 
+';
+			if ($mod->image) /* line 29 */ {
+				echo '    		<img src="';
+				echo LR\Filters::escapeHtmlAttr(LR\Filters::safeUrl($basePath)) /* line 30 */;
+				echo '/';
+				echo LR\Filters::escapeHtmlAttr($mod->image) /* line 30 */;
+				echo '" alt="Thumbnail">
+';
+			}
+			echo '
 		<div>';
-			echo LR\Filters::escapeHtmlText(($this->filters->truncate)($mod->description, 256)) /* line 29 */;
+			echo LR\Filters::escapeHtmlText(($this->filters->truncate)($mod->description, 256)) /* line 33 */;
 			echo '</div>
 
         <div class="date">';
-			echo LR\Filters::escapeHtmlText(($this->filters->date)($mod->created_at, 'F j, Y')) /* line 31 */;
+			echo LR\Filters::escapeHtmlText(($this->filters->date)($mod->created_at, 'F j, Y')) /* line 35 */;
 			echo '</div>
 	</div>
 ';

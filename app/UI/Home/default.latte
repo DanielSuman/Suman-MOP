@@ -1,6 +1,9 @@
 {* This is the welcome page, you can delete it *}
 
 {block content}
+
+<a n:href="Edit:create" n:if="$user->isLoggedIn()">Write an Article</a>
+
 <h1>Blog</h1>
 
 <div class="pagination">

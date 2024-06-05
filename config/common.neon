@@ -8,11 +8,8 @@ application:
 	mapping: App\UI\*\**Presenter
 
 
-database:
-	dsn: 'mysql:host=127.0.0.1;dbname=quickstart'
-	user: root
-	password: root
-
+session:
+	expiration: 14 days
 
 
 latte:
@@ -26,8 +23,3 @@ di:
 	export:
 		parameters: no
 		tags: no
-
-# old security
-#security:
-#	users:
-#		admin: secret  # user 'admin', password 'secret'
