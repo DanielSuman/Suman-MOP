@@ -10,7 +10,7 @@ return array (
     'App\\UI\\Edit\\EditPresenter' => 
     array (
       0 => '/home/daniel/projekty/quickstart/quickstart/app/UI/Edit/EditPresenter.php',
-      1 => 1717496725,
+      1 => 1717496826,
     ),
     'App\\UI\\Error\\Error4xx\\Error4xxPresenter' => 
     array (
@@ -26,6 +26,11 @@ return array (
     array (
       0 => '/home/daniel/projekty/quickstart/quickstart/app/UI/Accessory/LatteExtension.php',
       1 => 1715655818,
+    ),
+    'App\\UI\\Mod\\ModPresenter' => 
+    array (
+      0 => '/home/daniel/projekty/quickstart/quickstart/app/UI/Mod/ModPresenter.php',
+      1 => 1717588643,
     ),
     'App\\UI\\Home\\HomePresenter' => 
     array (
@@ -92,6 +97,11 @@ return array (
       0 => '/home/daniel/projekty/quickstart/quickstart/app/Model/UserFacade.php',
       1 => 1717494969,
     ),
+    'App\\Model\\ModFacade' => 
+    array (
+      0 => '/home/daniel/projekty/quickstart/quickstart/app/Model/ModFacade.php',
+      1 => 1717588597,
+    ),
     'App\\Core\\RouterFactory' => 
     array (
       0 => '/home/daniel/projekty/quickstart/quickstart/app/Core/RouterFactory.php',
@@ -119,6 +129,9 @@ return array (
     'App\\UI\\Dashboard\\DashboardDefaultTemplate' => 3,
     'App\\UI\\Dashboard\\DashboardTemplate' => 3,
     'App\\UI\\Post\\PostEditTemplate' => 1,
+    'App\\UI\\Mod\\ModDefaultTemplate' => 3,
+    'App\\UI\\Mod\\ModTemplate' => 3,
+    'App\\UI\\Mod\\ModShowTemplate' => 2,
   ),
   2 => 
   array (

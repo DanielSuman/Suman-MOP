@@ -62,33 +62,36 @@ final class Template_9af097fb56 extends Latte\Runtime\Template
 		<li><a href="';
 		echo LR\Filters::escapeHtmlAttr($this->global->uiControl->link('Game:')) /* line 15 */;
 		echo '">Games</a></li>
+		<li><a href="';
+		echo LR\Filters::escapeHtmlAttr($this->global->uiControl->link('Mod:')) /* line 16 */;
+		echo '">Mods</a></li>
 ';
-		if ($user->isLoggedIn()) /* line 16 */ {
+		if ($user->isLoggedIn()) /* line 17 */ {
 			echo '			<li><a href="';
-			echo LR\Filters::escapeHtmlAttr($this->global->uiControl->link('Sign:out')) /* line 17 */;
+			echo LR\Filters::escapeHtmlAttr($this->global->uiControl->link('Sign:out')) /* line 18 */;
 			echo '">Sign-out</a></li>
 ';
-		} else /* line 18 */ {
+		} else /* line 19 */ {
 			echo '			<li><a href="';
-			echo LR\Filters::escapeHtmlAttr($this->global->uiControl->link('Sign:in')) /* line 19 */;
+			echo LR\Filters::escapeHtmlAttr($this->global->uiControl->link('Sign:in')) /* line 20 */;
 			echo '">Sign-in</a></li>
 			<li><a href="';
-			echo LR\Filters::escapeHtmlAttr($this->global->uiControl->link('Sign:up')) /* line 20 */;
+			echo LR\Filters::escapeHtmlAttr($this->global->uiControl->link('Sign:up')) /* line 21 */;
 			echo '">Sign-Up</a></li>
 ';
 		}
 		echo '	</ul>
 
 ';
-		if ($user->isLoggedIn()) /* line 24 */ {
+		if ($user->isLoggedIn()) /* line 25 */ {
 			echo '	<a href="';
-			echo LR\Filters::escapeHtmlAttr($this->global->uiControl->link('Edit:create')) /* line 24 */;
+			echo LR\Filters::escapeHtmlAttr($this->global->uiControl->link('Edit:create')) /* line 25 */;
 			echo '">Vytvořit příspěvek</a>
 ';
 		}
-		$this->renderBlock('content', [], 'html') /* line 25 */;
+		$this->renderBlock('content', [], 'html') /* line 26 */;
 		echo "\n";
-		$this->renderBlock('scripts', get_defined_vars()) /* line 27 */;
+		$this->renderBlock('scripts', get_defined_vars()) /* line 28 */;
 		echo '</body>
 </html>
 ';
@@ -108,7 +111,7 @@ final class Template_9af097fb56 extends Latte\Runtime\Template
 	}
 
 
-	/** {block scripts} on line 27 */
+	/** {block scripts} on line 28 */
 	public function blockScripts(array $ʟ_args): void
 	{
 		echo '	<script src="https://unpkg.com/nette-forms@3/src/assets/netteForms.js"></script>

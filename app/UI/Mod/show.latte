@@ -1,0 +1,9 @@
+{block content}
+
+<p><a n:href="Mod:default">← back to mods list</a></p>
+
+<h1 n:block="name">{$mod->name}</h1>
+
+<div class="mod">{$mod->description}</div>
+
+<div class="date">{$mod->created_at|date:'F j, Y'}</div>
