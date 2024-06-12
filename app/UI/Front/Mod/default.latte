@@ -1,0 +1,37 @@
+{* This is the welcome page, you can delete it *}
+
+{block content}
+<h1>Mods</h1>
+
+<div class="pagination">
+	{if !$paginator->isFirst()}
+		<a n:href="default, 1">First</a>
+		&nbsp;|&nbsp;
+		<a n:href="default, $paginator->page-1">Previous</a>
+		&nbsp;|&nbsp;
+	{/if}
+
+	Page {$paginator->getPage()} of {$paginator->getPageCount()}
+
+	{if !$paginator->isLast()}
+		&nbsp;|&nbsp;
+		<a n:href="default, $paginator->getPage() + 1">Next</a>
+		&nbsp;|&nbsp;
+		<a n:href="default, $paginator->getPageCount()">Last</a>
+	{/if}
+</div>
+
+{foreach $mods as $mod}
+	<div class="mod">
+
+		<h2><a href="{link Mod:show $mod->id}">{$mod->name}</a></h2>
+
+		{if $mod->image}
+    		<img src="{$basePath}/{$mod->image}" alt="Thumbnail">
+		{/if}
+
+		<div>{$mod->description|truncate:256}</div>
+
+        <div class="date">{$mod->created_at|date:'F j, Y'}</div>
+	</div>
+	{/foreach}

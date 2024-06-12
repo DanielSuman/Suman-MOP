@@ -2,15 +2,35 @@
 return array (
   0 => 
   array (
-    'App\\UI\\Sign\\SignPresenter' => 
+    'App\\UI\\Admin\\Sign\\SignPresenter' => 
     array (
-      0 => '/home/daniel/projekty/quickstart/quickstart/app/UI/SIgn/SignPresenter.php',
-      1 => 1717495535,
+      0 => '/home/daniel/projekty/quickstart/quickstart/app/UI/Admin/SIgn/SignPresenter.php',
+      1 => 1718194114,
     ),
     'App\\UI\\Edit\\EditPresenter' => 
     array (
-      0 => '/home/daniel/projekty/quickstart/quickstart/app/UI/Edit/EditPresenter.php',
-      1 => 1717592582,
+      0 => '/home/daniel/projekty/quickstart/quickstart/app/UI/Admin/Edit/EditPresenter.php',
+      1 => 1718192777,
+    ),
+    'App\\UI\\Admin\\Mod\\ModPresenter' => 
+    array (
+      0 => '/home/daniel/projekty/quickstart/quickstart/app/UI/Admin/Mod/ModPresenter.php',
+      1 => 1718195036,
+    ),
+    'App\\UI\\Admin\\Home\\HomePresenter' => 
+    array (
+      0 => '/home/daniel/projekty/quickstart/quickstart/app/UI/Admin/Home/HomePresenter.php',
+      1 => 1718195316,
+    ),
+    'App\\UI\\Admin\\Dashboard\\DashboardPresenter' => 
+    array (
+      0 => '/home/daniel/projekty/quickstart/quickstart/app/UI/Admin/Dashboard/DashboardPresenter.php',
+      1 => 1718192745,
+    ),
+    'App\\UI\\Admin\\Dashboard\\RequireLoggedUser' => 
+    array (
+      0 => '/home/daniel/projekty/quickstart/quickstart/app/UI/Admin/Dashboard/RequireLoggedUser.php',
+      1 => 1718194202,
     ),
     'App\\UI\\Error\\Error4xx\\Error4xxPresenter' => 
     array (
@@ -27,45 +47,40 @@ return array (
       0 => '/home/daniel/projekty/quickstart/quickstart/app/UI/Accessory/LatteExtension.php',
       1 => 1715655818,
     ),
-    'App\\UI\\Mod\\ModPresenter' => 
+    'App\\UI\\Front\\Sign\\SignPresenter' => 
     array (
-      0 => '/home/daniel/projekty/quickstart/quickstart/app/UI/Mod/ModPresenter.php',
-      1 => 1717590691,
+      0 => '/home/daniel/projekty/quickstart/quickstart/app/UI/Front/SIgn/SignPresenter.php',
+      1 => 1718194433,
     ),
-    'App\\UI\\Home\\HomePresenter' => 
+    'App\\UI\\Front\\Mod\\ModPresenter' => 
     array (
-      0 => '/home/daniel/projekty/quickstart/quickstart/app/UI/Home/HomePresenter.php',
-      1 => 1717485014,
+      0 => '/home/daniel/projekty/quickstart/quickstart/app/UI/Front/Mod/ModPresenter.php',
+      1 => 1718193482,
     ),
-    'App\\UI\\Game\\GamePresenter' => 
+    'App\\UI\\Front\\Home\\HomePresenter' => 
     array (
-      0 => '/home/daniel/projekty/quickstart/quickstart/app/UI/Game/GamePresenter.php',
-      1 => 1717148362,
+      0 => '/home/daniel/projekty/quickstart/quickstart/app/UI/Front/Home/HomePresenter.php',
+      1 => 1718193449,
     ),
-    'App\\UI\\Dashboard\\DashboardPresenter' => 
+    'App\\UI\\Front\\Game\\GamePresenter' => 
     array (
-      0 => '/home/daniel/projekty/quickstart/quickstart/app/UI/Dashboard/DashboardPresenter.php',
-      1 => 1717495576,
+      0 => '/home/daniel/projekty/quickstart/quickstart/app/UI/Front/Game/GamePresenter.php',
+      1 => 1718193465,
     ),
-    'App\\UI\\Dashboard\\RequireLoggedUser' => 
+    'App\\UI\\Front\\Post\\PostPresenter' => 
     array (
-      0 => '/home/daniel/projekty/quickstart/quickstart/app/UI/Dashboard/RequireLoggedUser.php',
-      1 => 1717495925,
-    ),
-    'App\\UI\\Post\\PostPresenter' => 
-    array (
-      0 => '/home/daniel/projekty/quickstart/quickstart/app/UI/Post/PostPresenter.php',
-      1 => 1717588807,
+      0 => '/home/daniel/projekty/quickstart/quickstart/app/UI/Front/Post/PostPresenter.php',
+      1 => 1718193491,
     ),
     'App\\Forms\\SignInFormFactory' => 
     array (
       0 => '/home/daniel/projekty/quickstart/quickstart/app/Forms/SignInFormFactory.php',
-      1 => 1717495093,
+      1 => 1718190385,
     ),
     'App\\Forms\\SignUpFormFactory' => 
     array (
       0 => '/home/daniel/projekty/quickstart/quickstart/app/Forms/SignUpFormFactory.php',
-      1 => 1717495093,
+      1 => 1718190385,
     ),
     'App\\Forms\\FormFactory' => 
     array (
@@ -90,12 +105,12 @@ return array (
     'App\\Model\\UserFacade' => 
     array (
       0 => '/home/daniel/projekty/quickstart/quickstart/app/Model/UserFacade.php',
-      1 => 1717595971,
+      1 => 1718190385,
     ),
     'App\\Model\\DuplicateNameException' => 
     array (
       0 => '/home/daniel/projekty/quickstart/quickstart/app/Model/UserFacade.php',
-      1 => 1717595971,
+      1 => 1718190385,
     ),
     'App\\Model\\ModFacade' => 
     array (
@@ -105,7 +120,7 @@ return array (
     'App\\Core\\RouterFactory' => 
     array (
       0 => '/home/daniel/projekty/quickstart/quickstart/app/Core/RouterFactory.php',
-      1 => 1717495061,
+      1 => 1718194406,
     ),
   ),
   1 => 

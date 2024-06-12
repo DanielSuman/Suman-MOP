@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width">
+	<link rel="stylesheet" href="{$basePath}/css/style-admin.css">
+	<title>{ifset title}{include title|stripHtml} | {/ifset}Nette Web</title>
+</head>
+
+<body>
+	<div n:foreach="$flashes as $flash" n:class="flash, $flash->type">{$flash->message}</div>
+	<h1>Admin</h1>
+	<ul class="navig">
+		{if $user->isLoggedIn()}
+			<li>Logged in as <strong>{$user->getIdentity()->nickname}</strong> | <a n:href="Sign:out">Sign-out</a></li>
+		{else}
+			<li>No registered user detected | <a n:href="Sign:in">Sign-In</a></li>
+		{/if}
+		<li><a n:href="Dashboard:">Dashboard</a></li>
+		<li><a n:href="Home:">Home</a></li>
+		<li><a n:href="Mod:">Mods</a></li>
+	</ul>
+
+	
+	{include content}
+
+	{block scripts}
+	<script src="https://unpkg.com/nette-forms@3/src/assets/netteForms.js"></script>
+	{/block}
+</body>
+</html>

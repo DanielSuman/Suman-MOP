@@ -1,0 +1,39 @@
+{* This is the welcome page, you can delete it *}
+
+{block content}
+
+{* <a n:href="Edit:create" n:if="$user->isLoggedIn()">Write an Article</a> *}
+
+<h1>Blog</h1>
+
+<div class="pagination">
+	{if !$paginator->isFirst()}
+		<a n:href="default, 1">First</a>
+		&nbsp;|&nbsp;
+		<a n:href="default, $paginator->page-1">Previous</a>
+		&nbsp;|&nbsp;
+	{/if}
+
+	Page {$paginator->getPage()} of {$paginator->getPageCount()}
+
+	{if !$paginator->isLast()}
+		&nbsp;|&nbsp;
+		<a n:href="default, $paginator->getPage() + 1">Next</a>
+		&nbsp;|&nbsp;
+		<a n:href="default, $paginator->getPageCount()">Last</a>
+	{/if}
+</div>
+
+{foreach $posts as $post}
+	<div class="post">
+
+		<h2><a href="{link Post:show $post->id}">{$post->title}</a></h2>
+
+		<img src="{$basePath}/{$post->image}" alt="Obrázek k článku {$post->title}">
+		
+		<div>{$post->content|truncate:256}</div>
+
+        <div class="date">{$post->created_at|date:'F j, Y'}</div>
+	</div>
+	{/foreach}
+
