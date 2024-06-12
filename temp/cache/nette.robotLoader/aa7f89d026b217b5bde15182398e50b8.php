@@ -7,10 +7,15 @@ return array (
       0 => '/home/daniel/projekty/quickstart/quickstart/app/UI/Admin/SIgn/SignPresenter.php',
       1 => 1718194114,
     ),
-    'App\\UI\\Edit\\EditPresenter' => 
+    'App\\UI\\Admin\\Edit\\EditPresenter' => 
     array (
       0 => '/home/daniel/projekty/quickstart/quickstart/app/UI/Admin/Edit/EditPresenter.php',
-      1 => 1718192777,
+      1 => 1718197312,
+    ),
+    'App\\UI\\Admin\\ModEdit\\ModEditPresenter' => 
+    array (
+      0 => '/home/daniel/projekty/quickstart/quickstart/app/UI/Admin/ModEdit/ModEditPresenter.php',
+      1 => 1718198416,
     ),
     'App\\UI\\Admin\\Mod\\ModPresenter' => 
     array (
@@ -120,7 +125,7 @@ return array (
     'App\\Model\\ModFacade' => 
     array (
       0 => '/home/daniel/projekty/quickstart/quickstart/app/Model/ModFacade.php',
-      1 => 1717595557,
+      1 => 1718198529,
     ),
     'App\\Core\\RouterFactory' => 
     array (
@@ -166,20 +171,31 @@ return array (
     'App\\UI\\Admin\\Dashboard\\DashboardTemplate' => 3,
     'App\\UI\\Front\\Sign\\SignOutTemplate' => 2,
     'App\\UI\\Front\\Dashboard\\DashboardPresenter' => 3,
-    'App\\UI\\Admin\\Sign\\SignInTemplate' => 2,
+    'App\\UI\\Admin\\Sign\\SignInTemplate' => 3,
     'App\\UI\\Admin\\Sign\\SignTemplate' => 3,
-    'App\\UI\\Admin\\Sign\\SignOutTemplate' => 1,
+    'App\\UI\\Admin\\Sign\\SignOutTemplate' => 2,
     'App\\UI\\Front\\Edit\\EditPresenter' => 2,
-    'App\\UI\\Front\\Mod\\ModDefaultTemplate' => 2,
-    'App\\UI\\Front\\Mod\\ModTemplate' => 2,
-    'App\\UI\\Front\\Game\\GameDefaultTemplate' => 1,
-    'App\\UI\\Front\\Game\\GameTemplate' => 1,
+    'App\\UI\\Front\\Mod\\ModDefaultTemplate' => 3,
+    'App\\UI\\Front\\Mod\\ModTemplate' => 3,
+    'App\\UI\\Front\\Game\\GameDefaultTemplate' => 2,
+    'App\\UI\\Front\\Game\\GameTemplate' => 2,
     'App\\UI\\Front\\Post\\PostShowTemplate' => 1,
     'App\\UI\\Front\\Post\\PostTemplate' => 1,
     'App\\UI\\Admin\\Home\\HomeDefaultTemplate' => 3,
     'App\\UI\\Admin\\Home\\HomeTemplate' => 3,
     'App\\UI\\Admin\\Mod\\ModDefaultTemplate' => 3,
     'App\\UI\\Admin\\Mod\\ModTemplate' => 3,
+    'App\\UI\\Edit\\EditPresenter' => 2,
+    'App\\UI\\Admin\\Mod\\ModShowTemplate' => 3,
+    'App\\UI\\Admin\\Post\\PostShowTemplate' => 3,
+    'App\\UI\\Admin\\Post\\PostTemplate' => 3,
+    'App\\UI\\Admin\\Edit\\EditEditTemplate' => 3,
+    'App\\UI\\Admin\\Edit\\EditTemplate' => 3,
+    'App\\UI\\Front\\Mod\\ModShowTemplate' => 2,
+    'App\\UI\\Admin\\Edit\\ModEditPresenter' => 2,
+    'App\\UI\\Admin\\ModEdit\\ModEditEditTemplate' => 3,
+    'App\\UI\\Admin\\ModEdit\\ModEditTemplate' => 3,
+    'App\\UI\\Admin\\ModEdit\\ModEditCreateTemplate' => 2,
   ),
   2 => 
   array (

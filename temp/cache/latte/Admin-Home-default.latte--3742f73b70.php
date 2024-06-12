@@ -47,6 +47,13 @@ final class Template_3742f73b70 extends Latte\Runtime\Template
 		extract($ʟ_args);
 		unset($ʟ_args);
 
+		echo "\n";
+		if ($user->isLoggedIn()) /* line 5 */ {
+			echo '<a href="';
+			echo LR\Filters::escapeHtmlAttr($this->global->uiControl->link('Edit:create')) /* line 5 */;
+			echo '">Write an Article</a>
+';
+		}
 		echo '
 <h1>Blog</h1>
 

@@ -3,6 +3,8 @@
 {block content}
 <h1>Mods</h1>
 
+<a n:href="ModEdit:create" n:if="$user->isLoggedIn()">Upload New Mod</a>
+
 <div class="pagination">
 	{if !$paginator->isFirst()}
 		<a n:href="default, 1">First</a>

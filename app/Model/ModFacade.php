@@ -11,6 +11,23 @@ final class ModFacade
     ) {
     }
 
+    public function insertMod($data)
+    {
+        $mod = $this->database
+            ->table('mods')
+            ->insert($data);
+
+        return $mod;
+    }
+    public function editMod($modId, $data)
+    {
+        $mod = $this->database
+            ->table('mods')
+            ->get($modId);
+        $mod->update($data);
+        return $mod;
+    }
+
     public function getPublishedMods(int $limit, int $offset): Nette\Database\ResultSet
     {
         return $this->database->query(
@@ -24,7 +41,6 @@ final class ModFacade
             $limit,
             $offset,
         );
-
     }
 
     public function getPublishedModsByCount(): int
@@ -39,5 +55,4 @@ final class ModFacade
             ->get($id);
         return $mod;
     }
-
 }

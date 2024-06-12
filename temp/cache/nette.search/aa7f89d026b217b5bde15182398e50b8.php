@@ -7,10 +7,15 @@ return array (
       0 => '/home/daniel/projekty/quickstart/quickstart/app/UI/Admin/SIgn/SignPresenter.php',
       1 => 1718194114,
     ),
-    'App\\UI\\Edit\\EditPresenter' => 
+    'App\\UI\\Admin\\Edit\\EditPresenter' => 
     array (
       0 => '/home/daniel/projekty/quickstart/quickstart/app/UI/Admin/Edit/EditPresenter.php',
-      1 => 1718192777,
+      1 => 1718197312,
+    ),
+    'App\\UI\\Admin\\ModEdit\\ModEditPresenter' => 
+    array (
+      0 => '/home/daniel/projekty/quickstart/quickstart/app/UI/Admin/ModEdit/ModEditPresenter.php',
+      1 => 1718198416,
     ),
     'App\\UI\\Admin\\Mod\\ModPresenter' => 
     array (
@@ -31,6 +36,11 @@ return array (
     array (
       0 => '/home/daniel/projekty/quickstart/quickstart/app/UI/Admin/Dashboard/RequireLoggedUser.php',
       1 => 1718194202,
+    ),
+    'App\\UI\\Admin\\Post\\PostPresenter' => 
+    array (
+      0 => '/home/daniel/projekty/quickstart/quickstart/app/UI/Admin/Post/PostPresenter.php',
+      1 => 1718195354,
     ),
     'App\\UI\\Error\\Error4xx\\Error4xxPresenter' => 
     array (
@@ -115,7 +125,7 @@ return array (
     'App\\Model\\ModFacade' => 
     array (
       0 => '/home/daniel/projekty/quickstart/quickstart/app/Model/ModFacade.php',
-      1 => 1717595557,
+      1 => 1718198529,
     ),
     'App\\Core\\RouterFactory' => 
     array (

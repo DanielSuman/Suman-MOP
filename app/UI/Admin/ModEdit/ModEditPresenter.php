@@ -1,13 +1,13 @@
 <?php
 
-namespace App\UI\Admin\Edit;
+namespace App\UI\Admin\ModEdit;
 
 use Nette;
-use App\Model\PostFacade;
+use App\Model\ModFacade;
 use App\UI\Admin\Dashboard\RequireLoggedUser;
 use Nette\Application\UI\Form;
 
-final class EditPresenter extends Nette\Application\UI\Presenter
+final class ModEditPresenter extends Nette\Application\UI\Presenter
 {
 
     use RequireLoggedUser;
@@ -22,72 +22,73 @@ final class EditPresenter extends Nette\Application\UI\Presenter
     }
 
     public function __construct(
-        private PostFacade $facade,
+        private ModFacade $facade,
     ) {
     }
 
-    protected function createComponentPostForm(): Form
+    protected function createComponentModForm(): Form
     {
         $form = new Form;
 
-        $form->addText('title', 'Titulek:')
+        $form->addText('name', 'Mod Name:')
             ->setRequired();
-        $form->addTextArea('content', 'Obsah:')
+        $form->addTextArea('description', 'Mod Description:')
             ->setRequired();
-        $form->addUpload('image', 'Soubor')
+        $form->addUpload('image', 'Mod Thumbnail')
             ->setRequired()
             ->addRule(Form::IMAGE, 'Thumbnail must be JPEG, PNG or GIF');
+        $form->addText('vidprev', 'Video Preview (YouTube Embed URL):');
 
-        $form->addSubmit('send', 'Uložit a publikovat');
-        $form->onSuccess[] = $this->postFormSucceeded(...);
+        $form->addSubmit('send', 'Save and Publish');
+        $form->onSuccess[] = $this->modFormSucceeded(...);
 
         return $form;
     }
 
-    private function postFormSucceeded($form, $data): void
+    private function modFormSucceeded($form, $data): void
     {
-        $postId = $this->getParameter('postId');
+        $modId = $this->getParameter('modId');
 
         if (filesize($data->image) > 0) {
             if ($data->image->isOk()) {
                 // Extract the file extension
                 $extension = pathinfo($data->image->getSanitizedName(), PATHINFO_EXTENSION);
-                
+
                 // Define the new file name as "thumbnail" with the original extension
                 $newFileName = 'thumbnail.' . $extension;
-        
+
                 // Define the upload path
-                $uploadPath = 'upload/posts/' . $postId . '/' . $newFileName;
-        
+                $uploadPath = 'upload/mods/' . $modId . '/' . $newFileName;
+
                 // Move the uploaded file to the new location with the new file name
                 $data->image->move($uploadPath);
-        
+
                 // Update the image path in the $data array
                 $data['image'] = $uploadPath;
             } else {
                 $this->flashMessage('File was not added', 'failed');
             }
-        }        
+        }
 
-        if ($postId) {
-            $post = $this->facade->editPost($postId, (array) $data);
+        if ($modId) {
+            $mod = $this->facade->editMod($modId, (array) $data);
         } else {
-            $post = $this->facade->insertPost((array) $data);
+            $mod = $this->facade->insertMod((array) $data);
         }
 
         $this->flashMessage('Příspěvek byl úspěšně publikován.', 'success');
-        $this->redirect('Post:show', $post->id);
+        $this->redirect('Mod:show', $mod->id);
     }
 
-    public function renderEdit(int $postId): void
+    public function renderEdit(int $modId): void
     {
-        $post = $this->facade->getPostById($postId);
+        $mod = $this->facade->getModById($modId);
 
-        if (!$post) {
-            $this->error('Post not found');
+        if (!$mod) {
+            $this->error('Mod not found');
         }
 
-        $this->getComponent('postForm')
-            ->setDefaults($post->toArray());
+        $this->getComponent('modForm')
+            ->setDefaults($mod->toArray());
     }
 }
