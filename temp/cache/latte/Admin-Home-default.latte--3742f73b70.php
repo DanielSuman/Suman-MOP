@@ -27,19 +27,6 @@ final class Template_3742f73b70 extends Latte\Runtime\Template
 	}
 
 
-	public function prepare(): array
-	{
-		extract($this->params);
-
-		if (!$this->getReferringTemplate() || $this->getReferenceType() === 'extends') {
-			foreach (array_intersect_key(['post' => '27'], $this->params) as $ʟ_v => $ʟ_l) {
-				trigger_error("Variable \$$ʟ_v overwritten in foreach on line $ʟ_l");
-			}
-		}
-		return get_defined_vars();
-	}
-
-
 	/** {block content} on line 3 */
 	public function blockContent(array $ʟ_args): void
 	{
@@ -92,35 +79,8 @@ final class Template_3742f73b70 extends Latte\Runtime\Template
 		echo '</div>
 
 ';
-		foreach ($posts as $post) /* line 27 */ {
-			echo '	<div class="post">
-
-		<h2><a href="';
-			echo LR\Filters::escapeHtmlAttr($this->global->uiControl->link('Post:show', [$post->id])) /* line 30 */;
-			echo '">';
-			echo LR\Filters::escapeHtmlText($post->title) /* line 30 */;
-			echo '</a></h2>
-
-		<img src="';
-			echo LR\Filters::escapeHtmlAttr(LR\Filters::safeUrl($basePath)) /* line 32 */;
-			echo '/';
-			echo LR\Filters::escapeHtmlAttr($post->image) /* line 32 */;
-			echo '" alt="Obrázek k článku ';
-			echo LR\Filters::escapeHtmlAttr($post->title) /* line 32 */;
-			echo '">
-		
-		<div>';
-			echo LR\Filters::escapeHtmlText(($this->filters->truncate)($post->content, 256)) /* line 34 */;
-			echo '</div>
-
-        <div class="date">';
-			echo LR\Filters::escapeHtmlText(($this->filters->date)($post->created_at, 'F j, Y')) /* line 36 */;
-			echo '</div>
-	</div>
-';
-
-		}
-
-		echo "\n";
+		$ʟ_tmp = $this->global->uiControl->getComponent('simpleGrid');
+		if ($ʟ_tmp instanceof Nette\Application\UI\Renderable) $ʟ_tmp->redrawControl(null, false);
+		$ʟ_tmp->render() /* line 27 */;
 	}
 }

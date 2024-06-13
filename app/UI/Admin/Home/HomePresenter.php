@@ -6,6 +6,7 @@ namespace App\UI\Admin\Home;
 
 use Nette;
 use App\Model\PostFacade;
+use Ublaboo\DataGrid\DataGrid;
 
 
 final class HomePresenter extends Nette\Application\UI\Presenter
@@ -14,6 +15,17 @@ final class HomePresenter extends Nette\Application\UI\Presenter
         private PostFacade $facade,
     ) {
     }
+
+	public function createComponentSimpleGrid($name)
+	{
+		$grid = new Datagrid($this, $name);
+
+		$grid->setDataSource($this->facade->getPublicArticles());
+		$grid->addColumnNumber('id', 'Id')->setSortable();
+		$grid->addColumnText('title', 'Title')->setSortable();
+
+		return $grid;
+	}
 
     public function renderDefault(int $page = 1): void
     {

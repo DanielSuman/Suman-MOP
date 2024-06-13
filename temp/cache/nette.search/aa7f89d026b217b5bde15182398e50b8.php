@@ -15,7 +15,7 @@ return array (
     'App\\UI\\Admin\\ModEdit\\ModEditPresenter' => 
     array (
       0 => '/home/daniel/projekty/quickstart/quickstart/app/UI/Admin/ModEdit/ModEditPresenter.php',
-      1 => 1718198416,
+      1 => 1718273427,
     ),
     'App\\UI\\Admin\\Mod\\ModPresenter' => 
     array (
@@ -25,7 +25,7 @@ return array (
     'App\\UI\\Admin\\Home\\HomePresenter' => 
     array (
       0 => '/home/daniel/projekty/quickstart/quickstart/app/UI/Admin/Home/HomePresenter.php',
-      1 => 1718195316,
+      1 => 1718280635,
     ),
     'App\\UI\\Admin\\Dashboard\\DashboardPresenter' => 
     array (
@@ -40,7 +40,7 @@ return array (
     'App\\UI\\Admin\\Post\\PostPresenter' => 
     array (
       0 => '/home/daniel/projekty/quickstart/quickstart/app/UI/Admin/Post/PostPresenter.php',
-      1 => 1718195354,
+      1 => 1718277164,
     ),
     'App\\UI\\Error\\Error4xx\\Error4xxPresenter' => 
     array (
@@ -110,7 +110,7 @@ return array (
     'App\\Model\\PostFacade' => 
     array (
       0 => '/home/daniel/projekty/quickstart/quickstart/app/Model/PostFacade.php',
-      1 => 1717486407,
+      1 => 1718277224,
     ),
     'App\\Model\\UserFacade' => 
     array (
