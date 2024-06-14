@@ -64,4 +64,9 @@ final class PostFacade
             ->get($id);
         return $post;
     }
+
+    public function getAll()
+    {
+        return $this->database->table('posts')->fetchAll();
+    }
 }
