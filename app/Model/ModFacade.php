@@ -55,4 +55,9 @@ final class ModFacade
             ->get($id);
         return $mod;
     }
+
+    public function getAll()
+    {
+        return $this->database->table('mods')->fetchAll();
+    }
 }

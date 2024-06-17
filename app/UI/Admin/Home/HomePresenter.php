@@ -23,6 +23,9 @@ final class HomePresenter extends Nette\Application\UI\Presenter
 		$grid->setDataSource($this->facade->getAll());
 		$grid->addColumnNumber('id', 'Id')->setSortable();
 		$grid->addColumnText('title', 'Title')->setSortable();
+		$grid->addColumnText('content', 'Content')->setSortable();
+		$grid->addColumnText('image', 'Image')->setSortable();
+		$grid->addColumnDateTime('created_at', 'Created at')->setSortable();
 
 		return $grid;
 	}

@@ -11,6 +11,24 @@ final class GameFacade
     ) {
     }
 
+    public function insertGame($data)
+    {
+        $game = $this->database
+            ->table('games')
+            ->insert($data);
+
+        return $game;
+    }
+    public function editGame($gameId, $data)
+    {
+        $game = $this->database
+            ->table('games')
+            ->get($gameId);
+        $game->update($data);
+        
+        return $game;
+    }
+
     public function getPublishedGames()
     {
         return $this->database

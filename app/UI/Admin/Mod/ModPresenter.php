@@ -4,6 +4,7 @@ namespace App\UI\Admin\Mod;
 
 use Nette;
 use App\Model\ModFacade;
+use Ublaboo\DataGrid\DataGrid;
 
 final class ModPresenter extends Nette\Application\UI\Presenter
 {
@@ -12,28 +13,25 @@ final class ModPresenter extends Nette\Application\UI\Presenter
     ) {
     }
 
-    public function renderDefault(int $page = 1): void
+    public function createComponentSimpleGrid($name)
     {
+        $grid = new Datagrid($this, $name);
 
-        // Zjistíme si celkový počet publikovaných článků
-		$modsCount = $this->facade->getPublishedModsByCount();
+        $grid->setDataSource($this->facade->getAll());
+        $grid->addColumnNumber('id', 'Id')->setSortable();
+        $grid->addColumnText('name', 'Mod Name')->setSortable();
+        $grid->addColumnText('description', 'Mod Description')->setSortable();
+        $grid->addColumnText('image', 'Mod Thumbnail')->setSortable();
+        $grid->addColumnText('vidprev', 'Mod Preview Video')->setSortable();
+        $grid->addColumnText('created_by', 'Mod Author')->setSortable();
+        $grid->addColumnDateTime('created_at', 'Created at')->setSortable();
 
-		// Vyrobíme si instanci Paginatoru a nastavíme jej
-		$paginator = new Nette\Utils\Paginator;
-		$paginator->setItemCount($modsCount); // celkový počet článků
-		$paginator->setItemsPerPage(5); // počet položek na stránce
-		$paginator->setPage($page); // číslo aktuální stránky
+        /* $grid->addColumnAction('edit', 'ModEdit:edit', '$modId'); Nefungující odkaz na editaci... */ 
 
-		// Z databáze si vytáhneme omezenou množinu článků podle výpočtu Paginatoru
-		$mods = $this->facade->getPublishedMods($paginator->getLength(), $paginator->getOffset());
-
-		// kterou předáme do šablony
-		$this->template->mods = $mods;
-		// a také samotný Paginator pro zobrazení možností stránkování
-		$this->template->paginator = $paginator;
-
+        return $grid;
     }
-/*
+
+    /*
     public function renderDefault(): void
     {
         $mods = $this->facade
@@ -53,7 +51,6 @@ final class ModPresenter extends Nette\Application\UI\Presenter
             $this->error('Mod not found');
         }
         $this->template->mod = $mod;
-    /*    $this->template->comments = $post->related('comments')->order('created_at'); */
+        /*    $this->template->comments = $post->related('comments')->order('created_at'); */
     }
-
 }
