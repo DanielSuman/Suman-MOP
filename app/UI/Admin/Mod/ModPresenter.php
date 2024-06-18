@@ -26,7 +26,8 @@ final class ModPresenter extends Nette\Application\UI\Presenter
         $grid->addColumnText('created_by', 'Mod Author')->setSortable();
         $grid->addColumnDateTime('created_at', 'Created at')->setSortable();
 
-        /* $grid->addColumnAction('edit', 'ModEdit:edit', '$modId'); Nefungující odkaz na editaci... */ 
+        $grid->addAction('ModEdit:edit', 'edit'); 
+        $grid->addAction('Mod:delete', 'delete'); 
 
         return $grid;
     }
