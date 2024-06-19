@@ -27,6 +27,20 @@ final class ModFacade
         $mod->update($data);
         return $mod;
     }
+    public function deleteMod($modId)
+    {
+        $mod = $this->database
+            ->table('mods')
+            ->get($modId);
+    
+        if ($mod) {
+            $mod->delete();
+            return true; // Return true to indicate successful deletion
+        }
+    
+        return false; // Return false if the mod was not found
+    }
+    
 
     public function getPublishedMods(int $limit, int $offset): Nette\Database\ResultSet
     {

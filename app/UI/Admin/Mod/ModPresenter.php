@@ -26,8 +26,10 @@ final class ModPresenter extends Nette\Application\UI\Presenter
         $grid->addColumnText('created_by', 'Mod Author')->setSortable();
         $grid->addColumnDateTime('created_at', 'Created at')->setSortable();
 
-        $grid->addAction('ModEdit:edit', 'edit'); 
-        $grid->addAction('Mod:delete', 'delete'); 
+        $grid->addAction('Mod:show', 'View');
+        $grid->addAction('ModEdit:edit', 'Edit');
+        $grid->addAction('delete', 'Smazat', 'delete!')
+            ->setClass('btn btn-xs btn-danger ajax');
 
         return $grid;
     }
@@ -53,5 +55,12 @@ final class ModPresenter extends Nette\Application\UI\Presenter
         }
         $this->template->mod = $mod;
         /*    $this->template->comments = $post->related('comments')->order('created_at'); */
+    }
+
+    public function handleDelete(int $id): void
+    {
+        $this->facade->deleteMod($id);
+        $this->flashMessage('Mod was deleted.', 'success');
+        $this->redirect('this');
     }
 }
