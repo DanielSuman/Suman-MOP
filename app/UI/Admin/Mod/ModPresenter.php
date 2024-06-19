@@ -24,7 +24,7 @@ final class ModPresenter extends Nette\Application\UI\Presenter
         $grid->addColumnText('description', 'Mod Description')->setSortable();
         $grid->addColumnText('image', 'Mod Thumbnail')->setSortable();
         $grid->addColumnText('vidprev', 'Mod Preview Video')->setSortable();
-        $grid->addColumnText('created_by', 'Mod Author')->setSortable();
+        $grid->addColumnText('user_id', 'Mod Author')->setSortable();
         $grid->addColumnText('mod_category', 'Mod Category')->setSortable();
         $grid->addColumnDateTime('created_at', 'Created at')->setSortable();
 
@@ -120,7 +120,7 @@ final class ModPresenter extends Nette\Application\UI\Presenter
             $mod = $this->facade->insertMod((array) $data);
         }
 
-        $this->flashMessage('Příspěvek byl úspěšně publikován.', 'success');
+        $this->flashMessage('Mod has been published successfully.', 'success');
         $this->redirect('Mod:show', $mod->id);
     }
 
@@ -134,5 +134,5 @@ final class ModPresenter extends Nette\Application\UI\Presenter
 
         $this->getComponent('modForm')
             ->setDefaults($mod->toArray());
-    }
+    } 
 }

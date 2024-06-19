@@ -34,6 +34,19 @@ final class PostFacade
         $post->update($data);
         return $post;
     }
+    public function deletePost($postId)
+    {
+        $post = $this->database
+            ->table('posts')
+            ->get($postId);
+    
+        if ($post) {
+            $post->delete();
+            return true; // Return true to indicate successful deletion
+        }
+    
+        return false; // Return false if the mod was not found
+    }
     public function getPublicArticles(int $limit, int $offset): Nette\Database\ResultSet
     {
         return $this->database->query(

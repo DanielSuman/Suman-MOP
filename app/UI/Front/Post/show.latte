@@ -1,6 +1,6 @@
 {block content}
 
-<p><a n:href="Home:default">← zpět na výpis příspěvků</a></p>
+<p><a n:href="Post:default">← back to articles list</a></p>
 
 <h1 n:block="title">{$post->title}</h1>
 
@@ -8,7 +8,7 @@
 
 <div class="post">{$post->content}</div>
 
-<div class="date">{$post->created_at|date:'F j, Y'}</div>
+<div class="date">Created by <strong>{$post->user->nickname}</strong> on <strong>{$post->created_at|date:'D. F j, Y'}</strong></div>
 
 {* <a n:href="Edit:edit $post->id">Edit Post</a> *}
 
