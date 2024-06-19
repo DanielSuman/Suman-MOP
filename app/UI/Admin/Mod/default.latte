@@ -3,7 +3,7 @@
 {block content}
 <h1>Mods</h1>
 
-<a n:href="ModEdit:create" n:if="$user->isLoggedIn()">Upload New Mod</a>
+<a n:href="Mod:create" n:if="$user->isLoggedIn()">Upload New Mod</a>
 
 
 {control simpleGrid}

@@ -1,0 +1,6 @@
+{* This is the welcome page, you can delete it *}
+
+{block content}
+<h1>Categories</h1>
+<a n:href="Category:create" n:if="$user->isLoggedIn()">Create a Category</a>
+{control simpleGrid}

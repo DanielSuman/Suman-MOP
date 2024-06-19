@@ -1,16 +1,16 @@
 <?php
 
-namespace App\UI\Admin\Mod;
+namespace App\UI\Admin\Category;
 
 use Nette;
-use App\Model\ModFacade;
+use App\Model\CategoryFacade;
 use Ublaboo\DataGrid\DataGrid;
 use Nette\Application\UI\Form;
 
-final class ModPresenter extends Nette\Application\UI\Presenter
+final class CategoryPresenter extends Nette\Application\UI\Presenter
 {
     public function __construct(
-        private ModFacade $facade,
+        private CategoryFacade $facade,
     ) {
     }
 
@@ -20,79 +20,75 @@ final class ModPresenter extends Nette\Application\UI\Presenter
 
         $grid->setDataSource($this->facade->getAll());
         $grid->addColumnNumber('id', 'Id')->setSortable();
-        $grid->addColumnText('name', 'Mod Name')->setSortable();
-        $grid->addColumnText('description', 'Mod Description')->setSortable();
-        $grid->addColumnText('image', 'Mod Thumbnail')->setSortable();
-        $grid->addColumnText('vidprev', 'Mod Preview Video')->setSortable();
-        $grid->addColumnText('created_by', 'Mod Author')->setSortable();
-        $grid->addColumnText('mod_category', 'Mod Category')->setSortable();
+        $grid->addColumnText('name', 'Category Name')->setSortable();
+        $grid->addColumnText('description', 'Category Description')->setSortable();
+        /*$grid->addColumnText('image', 'Image')->setSortable(); */
         $grid->addColumnDateTime('created_at', 'Created at')->setSortable();
 
-        $grid->addAction('Mod:show', 'View');
-        $grid->addAction('Mod:edit', 'Edit');
+        $grid->addAction('Category:show', 'View');
+        $grid->addAction('Category:edit', 'Edit');
         $grid->addAction('delete', 'Delete', 'delete!')
             ->setClass('btn btn-xs btn-danger ajax');
 
         return $grid;
     }
 
-    /*
     public function renderDefault(): void
     {
-        $mods = $this->facade
-            ->getPublishedMods()
-            ->limit(5);
-
-        bdump($mods);
-
-        $this->template->mods = $mods;
-    } */
+        $categories = $this->facade
+            ->getAllCategories();
+/*
+        bdump($categories);
+*/
+        $this->template->categories = $categories;
+    }
 
     public function renderShow(int $id): void
     {
-        $mod = $this->facade
-            ->getModById($id);
-        if (!$mod) {
-            $this->error('Mod not found');
+        $category = $this->facade
+            ->getCategoryById($id);
+        if (!$category) {
+            $this->error('Category not found');
         }
-        $this->template->mod = $mod;
-        /*    $this->template->comments = $post->related('comments')->order('created_at'); */
+
+        $this->template->category = $category;
     }
 
-    /* Deletion of Mods */
+    /* Deletion of Categories */
 
     public function handleDelete(int $id): void
     {
-        $this->facade->deleteMod($id);
-        $this->flashMessage('Mod was deleted.', 'success');
+        $this->facade->deleteCategory($id);
+        $this->flashMessage('Category was deleted.', 'success');
         $this->redirect('this');
     }
 
-    /* Creation of Mods */
+    /* Category Creation and Editation */
 
-    protected function createComponentModForm(): Form
+    protected function createComponentCategoryForm(): Form
     {
         $form = new Form;
 
-        $form->addText('name', 'Mod Name:')
+        $form->addText('name', 'Category Name:')
             ->setRequired();
-        $form->addTextArea('description', 'Mod Description:')
+        $form->addTextArea('description', 'Category Description:')
             ->setRequired();
-        $form->addUpload('image', 'Mod Thumbnail')
+        /*    
+        $form->addUpload('image', 'Category Thumbnail')
             ->setRequired()
             ->addRule(Form::IMAGE, 'Thumbnail must be JPEG, PNG or GIF');
-        $form->addText('vidprev', 'Video Preview (YouTube Embed URL):');
+        $form->addText('vidprev', 'Video Preview (YouTube Embed URL):'); */
 
         $form->addSubmit('send', 'Save and Publish');
-        $form->onSuccess[] = $this->modFormSucceeded(...);
+        $form->onSuccess[] = $this->categoryFormSucceeded(...);
 
         return $form;
     }
 
-    private function modFormSucceeded($form, $data): void
+    private function categoryFormSucceeded($form, $data): void
     {
         $id = $this->getParameter('id');
-
+        /*
         if (filesize($data->image) > 0) {
             if ($data->image->isOk()) {
                 // Extract the file extension
@@ -112,27 +108,27 @@ final class ModPresenter extends Nette\Application\UI\Presenter
             } else {
                 $this->flashMessage('File was not added', 'failed');
             }
-        }
+        } */
 
         if ($id) {
-            $mod = $this->facade->editMod($id, (array) $data);
+            $category = $this->facade->editCategory($id, (array) $data);
         } else {
-            $mod = $this->facade->insertMod((array) $data);
+            $category = $this->facade->insertCategory((array) $data);
         }
 
         $this->flashMessage('Příspěvek byl úspěšně publikován.', 'success');
-        $this->redirect('Mod:show', $mod->id);
+        $this->redirect('Category:show', $category->id);
     }
 
     public function renderEdit(int $id): void
     {
-        $mod = $this->facade->getModById($id);
+        $category = $this->facade->getCategoryById($id);
 
-        if (!$mod) {
+        if (!$category) {
             $this->error('Mod not found');
         }
 
-        $this->getComponent('modForm')
-            ->setDefaults($mod->toArray());
+        $this->getComponent('categoryForm')
+            ->setDefaults($category->toArray());
     }
 }
