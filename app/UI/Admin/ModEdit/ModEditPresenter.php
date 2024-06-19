@@ -47,7 +47,7 @@ final class ModEditPresenter extends Nette\Application\UI\Presenter
 
     private function modFormSucceeded($form, $data): void
     {
-        $modId = $this->getParameter('modId');
+        $id = $this->getParameter('id');
 
         if (filesize($data->image) > 0) {
             if ($data->image->isOk()) {
@@ -58,7 +58,7 @@ final class ModEditPresenter extends Nette\Application\UI\Presenter
                 $newFileName = 'thumbnail.' . $extension;
 
                 // Define the upload path
-                $uploadPath = 'upload/mods/' . $modId . '/' . $newFileName;
+                $uploadPath = 'upload/mods/' . $id . '/' . $newFileName;
 
                 // Move the uploaded file to the new location with the new file name
                 $data->image->move($uploadPath);
@@ -70,8 +70,8 @@ final class ModEditPresenter extends Nette\Application\UI\Presenter
             }
         }
 
-        if ($modId) {
-            $mod = $this->facade->editMod($modId, (array) $data);
+        if ($id) {
+            $mod = $this->facade->editMod($id, (array) $data);
         } else {
             $mod = $this->facade->insertMod((array) $data);
         }
@@ -80,9 +80,9 @@ final class ModEditPresenter extends Nette\Application\UI\Presenter
         $this->redirect('Mod:show', $mod->id);
     }
 
-    public function renderEdit(int $modId): void
+    public function renderEdit(int $id): void
     {
-        $mod = $this->facade->getModById($modId);
+        $mod = $this->facade->getModById($id);
 
         if (!$mod) {
             $this->error('Mod not found');
