@@ -16,4 +16,19 @@ final class HomePresenter extends Nette\Application\UI\Presenter
     ) {
     }
 
+    protected function startup()
+    {
+        parent::startup();
+
+        // Check if the user is logged in
+        if (!$this->getUser()->isLoggedIn()) {
+            $this->redirect('Sign:in'); // redirect to the login page
+        }
+
+        // Check if the user is an admin
+        if (!$this->getUser()->isInRole('admin')) {
+            $this->redirect(':Front:Home:'); // redirect to the front module
+        }
+    }
+    
 }

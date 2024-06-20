@@ -14,24 +14,39 @@ final class PostPresenter extends Nette\Application\UI\Presenter
     ) {
     }
 
+    protected function startup()
+    {
+        parent::startup();
+
+        // Check if the user is logged in
+        if (!$this->getUser()->isLoggedIn()) {
+            $this->redirect('Sign:in'); // redirect to the login page
+        }
+
+        // Check if the user is an admin
+        if (!$this->getUser()->isInRole('admin')) {
+            $this->redirect(':Front:Home:'); // redirect to the front module
+        }
+    }
+
     public function createComponentSimpleGrid($name)
-	{
-		$grid = new Datagrid($this, $name);
+    {
+        $grid = new Datagrid($this, $name);
 
-		$grid->setDataSource($this->facade->getAll());
-		$grid->addColumnNumber('id', 'Id')->setSortable();
-		$grid->addColumnText('title', 'Title')->setSortable();
-		$grid->addColumnText('content', 'Content')->setSortable();
-		$grid->addColumnText('image', 'Image')->setSortable();
-		$grid->addColumnDateTime('created_at', 'Created at')->setSortable();
+        $grid->setDataSource($this->facade->getAll());
+        $grid->addColumnNumber('id', 'Id')->setSortable();
+        $grid->addColumnText('title', 'Title')->setSortable();
+        $grid->addColumnText('content', 'Content')->setSortable();
+        $grid->addColumnText('image', 'Image')->setSortable();
+        $grid->addColumnDateTime('created_at', 'Created at')->setSortable();
 
-		$grid->addAction('Post:show', 'View');
+        $grid->addAction('Post:show', 'View');
         $grid->addAction('Post:edit', 'Edit');
         $grid->addAction('delete', 'Delete', 'delete!')
             ->setClass('btn btn-xs btn-danger ajax');
 
-		return $grid;
-	}
+        return $grid;
+    }
 
     public function renderShow(int $id): void
     {
@@ -53,7 +68,7 @@ final class PostPresenter extends Nette\Application\UI\Presenter
         $this->redirect('this');
     }
 
-        protected function createComponentPostForm(): Form
+    protected function createComponentPostForm(): Form
     {
         $form = new Form;
 
@@ -85,22 +100,22 @@ final class PostPresenter extends Nette\Application\UI\Presenter
             if ($data->image->isOk()) {
                 // Extract the file extension
                 $extension = pathinfo($data->image->getSanitizedName(), PATHINFO_EXTENSION);
-                
+
                 // Define the new file name as "thumbnail" with the original extension
                 $newFileName = 'thumbnail.' . $extension;
-        
+
                 // Define the upload path
                 $uploadPath = 'upload/posts/' . $id . '/' . $newFileName;
-        
+
                 // Move the uploaded file to the new location with the new file name
                 $data->image->move($uploadPath);
-        
+
                 // Update the image path in the $data array
                 $data['image'] = $uploadPath;
             } else {
                 $this->flashMessage('File was not added', 'failed');
             }
-        }        
+        }
 
         if ($id) {
             $post = $this->facade->editPost($id, (array) $data);
