@@ -91,14 +91,6 @@ final class UserFacade implements Nette\Security\Authenticator
 		return $user;
 	}
 
-	public function getPostById(int $id)
-    {
-        $post = $this->database
-            ->table('posts')
-            ->get($id);
-        return $post;
-    }
-
     public function getAll()
     {
         return $this->database->table('users')->fetchAll();

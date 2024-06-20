@@ -62,9 +62,9 @@ final class UserPresenter extends Nette\Application\UI\Presenter
         $user = $this->facade
             ->getUserById($id);
         if (!$user) {
-            $this->error('Post not found');
+            $this->error('User not found');
         }
-        $this->template->user = $user;
+        $this->template->userdata = $user;
     }
 
     /* Deletion of Users */
