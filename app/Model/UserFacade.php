@@ -91,6 +91,51 @@ final class UserFacade implements Nette\Security\Authenticator
 		return $user;
 	}
 
+	public function getPostById(int $id)
+    {
+        $post = $this->database
+            ->table('posts')
+            ->get($id);
+        return $post;
+    }
+
+    public function getAll()
+    {
+        return $this->database->table('users')->fetchAll();
+    }
+
+	public function insertUser($data)
+    {
+        $user = $this->database
+            ->table('users')
+            ->insert($data);
+
+        return $user;
+    }
+
+    public function editUser($id, $data)
+    {
+        $user = $this->database
+            ->table('users')
+            ->get($id);
+        $user->update($data);
+        return $user;
+    }
+
+    public function deleteUser($id)
+    {
+        $user = $this->database
+            ->table('users')
+            ->get($id);
+    
+        if ($user) {
+            $user->delete();
+            return true; // Return true to indicate successful deletion
+        }
+    
+        return false; // Return false if the mod was not found
+    }
+
 }
 
 
