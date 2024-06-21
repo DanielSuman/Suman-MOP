@@ -140,3 +140,7 @@ body {
     font-family: COD;
     text-align: center;
 }
+
+.pagination {
+    text-align: center;
+}

@@ -19,3 +19,25 @@
 <div class="date">Created on {$mod->created_at|date:'D. F j, Y'}</div>
 
 {* <a n:href="Mod:edit $mod->id">Edit Post</a> *}
+
+	{if $user->isLoggedIn()}
+	<h2>Comment on this post</h2>
+
+	{control commentForm}
+	{/if}
+
+	<h2>Comments Section</h2>
+
+<div class="comments">
+    {foreach $comments as $comment}
+		{if $user->isLoggedIn() && ($user->id === $comment->user_id || $user->isInRole('admin') || $user->isInRole('moderator'))}
+            <a n:href="deleteComment! $comment->id" class="btn btn-danger">Delete</a>
+        {/if}
+        <p><b><a href="mailto:{$comment->email}" n:tag-if="$comment->email">
+            {$comment->name}
+        </a></b> wrote:</p>
+
+        <div>{$comment->content}</div>
+
+    {/foreach}
+</div>

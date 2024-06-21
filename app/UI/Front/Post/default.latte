@@ -7,10 +7,16 @@
 	<h1>Blog</h1>
 
 	<div class="pagination">
+		
 		{if !$paginator->isFirst()}
 			<a n:href="default, 1">First</a>
 			&nbsp;|&nbsp;
 			<a n:href="default, $paginator->page-1">Previous</a>
+			&nbsp;|&nbsp;
+		{else}
+			<a href="#" style="color:gray;">First</a>
+			&nbsp;|&nbsp;
+			<a href="#" style="color:gray;">Previous</a>
 			&nbsp;|&nbsp;
 		{/if}
 
@@ -21,6 +27,11 @@
 			<a n:href="default, $paginator->getPage() + 1">Next</a>
 			&nbsp;|&nbsp;
 			<a n:href="default, $paginator->getPageCount()">Last</a>
+		{else}
+			&nbsp;|&nbsp;
+			<a href="#" style="color:gray;">Next</a>
+			&nbsp;|&nbsp;
+			<a href="#" style="color:gray;">Last</a>
 		{/if}
 	</div>
 

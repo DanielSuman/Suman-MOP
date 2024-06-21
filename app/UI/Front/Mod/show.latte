@@ -1,21 +1,42 @@
 {block content}
 
-<p><a n:href="Mod:default">← back to mods list</a></p>
+<div class="main-panel">
+    <p><a n:href="Mod:default">← back to mods list</a></p>
 
-<h1 n:block="name">{$mod->name}</h1>
+    <h1 n:block="name">{$mod->name}</h1>
 
-{if $mod->image}
-    <img src="{$basePath}/{$mod->image}" alt="Thumbnail">
-{/if}
+    {if $mod->image}
+        <img src="{$basePath}/{$mod->image}" alt="Thumbnail">
+    {/if}
 
-<div class="mod">{$mod->description}</div>
+    <div class="mod">{$mod->description}</div>
 
-{if $mod->vidprev}
-    <h2>Preview video:</h2>
-    <iframe width="560" height="315" src="{$mod->vidprev}" frameborder="0" allowfullscreen></iframe>
-{/if}
+    {if $mod->vidprev}
+        <h2>Preview video:</h2>
+        <iframe width="560" height="315" src="{$mod->vidprev}" frameborder="0" allowfullscreen></iframe>
+    {/if}
 
-<div class="date">Created on <strong>{$mod->created_at|date:'D. F j, Y'}</strong></div>
+    <div class="date">Created on <strong>{$mod->created_at|date:'D. F j, Y'}</strong></div>
 
+        {if $user->isLoggedIn()}
+        <h2>Comment on this post</h2>
 
+        {control commentForm}
+        {/if}
 
+        <h2>Comments Section</h2>
+
+    <div class="comments">
+        {foreach $comments as $comment}
+            {if $user->isLoggedIn() && ($user->id === $comment->user_id || $user->isInRole('admin') || $user->isInRole('moderator'))}
+                <a n:href="deleteComment! $comment->id" class="btn btn-danger">Delete</a>
+            {/if}
+            <p><b><a href="mailto:{$comment->email}" n:tag-if="$comment->email">
+                {$comment->name}
+            </a></b> wrote:</p>
+
+            <div>{$comment->content}</div>
+
+        {/foreach}
+    </div>
+</div>

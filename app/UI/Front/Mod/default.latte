@@ -1,13 +1,21 @@
 {* This is the welcome page, you can delete it *}
 
 {block content}
+<div class="main-panel">
+
 <h1>Mods</h1>
 
 <div class="pagination">
+	
 	{if !$paginator->isFirst()}
 		<a n:href="default, 1">First</a>
 		&nbsp;|&nbsp;
 		<a n:href="default, $paginator->page-1">Previous</a>
+		&nbsp;|&nbsp;
+	{else}
+		<a href="#" style="color:gray;">First</a>
+		&nbsp;|&nbsp;
+		<a href="#" style="color:gray;">Previous</a>
 		&nbsp;|&nbsp;
 	{/if}
 
@@ -18,8 +26,42 @@
 		<a n:href="default, $paginator->getPage() + 1">Next</a>
 		&nbsp;|&nbsp;
 		<a n:href="default, $paginator->getPageCount()">Last</a>
+	{else}
+		&nbsp;|&nbsp;
+		<a href="#" style="color:gray;">Next</a>
+		&nbsp;|&nbsp;
+		<a href="#" style="color:gray;">Last</a>
 	{/if}
 </div>
+
+{*
+<div class="pagination">
+    {if !$paginator->isFirst()}
+        <a n:href="default, 1">First</a>
+        &nbsp;|&nbsp;
+        <a n:href="default, {$paginator->page-1}">Previous</a>
+        &nbsp;|&nbsp;
+    {else}
+        <span class="disabled">First</span>
+        &nbsp;|&nbsp;
+        <span class="disabled">Previous</span>
+        &nbsp;|&nbsp;
+    {/if}
+
+    Page {$paginator->getPage()} of {$paginator->getPageCount()}
+
+    {if !$paginator->isLast()}
+        &nbsp;|&nbsp;
+        <a n:href="default, {$paginator->getPage() + 1}">Next</a>
+        &nbsp;|&nbsp;
+        <a n:href="default, {$paginator->getPageCount()}">Last</a>
+    {else}
+        &nbsp;|&nbsp;
+        <span class="disabled">Next</span>
+        &nbsp;|&nbsp;
+        <span class="disabled">Last</span>
+    {/if}
+</div> *}
 
 {foreach $mods as $mod}
 	<div class="mod">
@@ -35,3 +77,4 @@
         <div class="date">{$mod->created_at|date:'F j, Y'}</div>
 	</div>
 	{/foreach}
+</div>
