@@ -3,7 +3,6 @@
 <head>
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width">
-	<link rel="stylesheet" href="{$basePath}/css/style-admin.css">
 	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.4.1/dist/css/bootstrap.css">
 	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/happy-inputs@2.0.4/src/happy.css">
 	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-datepicker@1.9.0/dist/css/bootstrap-datepicker.css">
@@ -16,6 +15,9 @@
 	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-select@1.13.15/dist/css/bootstrap-select.css">
 
 	<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.2/css/all.css" integrity="sha384-oS3vJWv+0UjzBfQzYUhtDYW+Pj2yciDJxpsK1OYPAYjqT085Qq/1cq5FLXAZQ7Ay" crossorigin="anonymous">
+	
+	
+	<link rel="stylesheet" href="{$basePath}/css/style-admin.css">
 
 	<title>{ifset title}{include title|stripHtml} | {/ifset}Nette Web</title>
 </head>
@@ -44,20 +46,38 @@
 	<!-- Include bootstrap-select.js when using FilterMultiSelect (silviomoreto.github.io/bootstrap-select) -->
 	<script src="https://cdn.jsdelivr.net/npm/bootstrap-select@1.13.15/dist/js/bootstrap-select.js"></script>
 	<div n:foreach="$flashes as $flash" n:class="flash, $flash->type">{$flash->message}</div>
-	<h1>Admin</h1>
-	<ul class="navig">
-		{if $user->isLoggedIn()}
-			<li>Logged in as <strong>{$user->getIdentity()->nickname}</strong> | <a n:href="Sign:out">Sign-out</a></li>
-		{else}
-			<li>No registered user detected | <a n:href="Sign:in">Sign-In</a></li>
-		{/if}
-		<li><a n:href="Dashboard:">Dashboard</a></li>
-		<li><a n:href="User:">Users</a></li>
-		<li><a n:href="Home:">Home</a></li>
-		<li><a n:href="Post:">Articles</a></li>
-		<li><a n:href="Category:">Mod Categories</a></li>
-		<li><a n:href="Mod:">Mods</a></li>
-	</ul>
+	{*<h1>Admin</h1>*}
+	{if ($user->isLoggedIn() && $user->isInRole('admin'))}
+		<div class="header">
+        <div class="inner_header">
+            <div class="logo_container"></div>
+            <ul class="navigation">
+				<li><a n:href="Home:">Home</a></li>
+					<li><a>Admin</a>
+						<ul class="sub-navigation">
+						{* <li><a href="https://store.steampowered.com/app/550/Left_4_Dead_2/">Steam Store Page</a></li> *} 
+							<li><a n:href=":Front:Home:">Switch to Front</a></li>
+							<li><a n:href="Dashboard:">Dashboard</a></li> 
+							<li><a n:href="User:">Users</a></li>
+							<li><a n:href="Post:">Blog</a></li>
+							<li><a n:href="Game:">Games</a></li>
+							<li><a n:href="Mod:">Mods</a></li>
+							<li><a n:href="Category:">Mod Categories</a></li>
+						</ul>
+						</li>
+						<li><a>Sign</a>
+							<ul class="sub-navigation">
+							{if $user->isLoggedIn()}
+									<li>{*Logged in as <strong>{$user->getIdentity()->nickname}</strong> | *}<a n:href=":Front:Sign:out">Sign-out</a></li>
+							{else}
+									<li><a n:href="Sign:in">Sign-In</a><a n:href=":Front:Sign:up">Sign-Up</a></li>
+							{/if}
+					</ul>
+				</li>
+            </ul>
+        </div>
+    </div>
+	{/if}
 
 	
 	{include content}

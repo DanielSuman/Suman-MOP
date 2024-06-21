@@ -1,4 +1,11 @@
 {block content}
-<h1>Administation</h1>
+<div class="user-card">
+    <h3>Successfully logged in as: <strong>"{$user->getIdentity()->nickname}"</strong></h3>
+    <h4>Authorization level: <strong>{$user->getIdentity()->role|capitalize}</strong></h4>
 
-<p>If you see this page, it means you have successfully logged in.</p>
+    {if $user->isInRole("admin")}
+        <p>Keeping things in order since <strong>{$user->getIdentity()->created_at|date:'D. F j, Y'}</strong></p>
+    {elseif $user->isInRole("moderator")}
+        <p>Overlooking and maintaining peace in the comments section since <strong>{$user->getIdentity()->created_at|date:'D. F j, Y'}</strong></p>
+    {/if}
+</div>

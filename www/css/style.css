@@ -8,13 +8,20 @@
     list-style: none;
     text-decoration: none;
 }
-
+/*
 body {
- /*   background-color: black;
-    background-image: url(../img/bg.jpeg); */
-    background-position: center;
+    background-color: black;
+    background-image: url("../img/bg.jpeg");
+    background-size: cover;
     background-repeat: no-repeat;
-    background-size: contain;
+    background-attachment: fixed; 
+}*/
+
+
+.main-panel {
+    margin: 0 auto;
+    width: 1200px;
+    background-color: rgba(0, 0, 0, 0.381);
 }
 
 .header {

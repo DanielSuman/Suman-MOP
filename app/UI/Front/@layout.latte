@@ -18,6 +18,9 @@
                 <li><a>Browse</a>
                     <ul class="sub-navigation">
                      {* <li><a href="https://store.steampowered.com/app/550/Left_4_Dead_2/">Steam Store Page</a></li> *}   
+						{if ($user->isLoggedIn() && $user->isInRole('admin'))}
+						<li><a n:href=":Admin:Home:">Switch to Admin</a></li>
+						{/if}
                         <li><a n:href="Post:">Blog</a></li>
                         <li><a n:href="Game:">Games</a></li>
 						<li><a n:href="Mod:">Mods</a></li>

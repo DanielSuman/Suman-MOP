@@ -90,9 +90,9 @@ final class UserPresenter extends Nette\Application\UI\Presenter
         $form->addText('username', 'Username:')
             ->setRequired();
         $form->addText('email', 'Email:')
-            ->setRequired();
+            ->setRequired(); /*
         $form->addPassword('password', 'Password:')
-            ->setRequired();
+            ->setRequired(); */
         $form->addText('phone', 'Phone:')
             ->setRequired();
         $form->addText('country', 'Country:')

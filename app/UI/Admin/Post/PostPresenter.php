@@ -4,6 +4,7 @@ namespace App\UI\Admin\Post;
 
 use Nette;
 use App\Model\PostFacade;
+use App\Model\CommentFacade;
 use Nette\Application\UI\Form;
 use Ublaboo\DataGrid\DataGrid;
 
@@ -11,6 +12,7 @@ final class PostPresenter extends Nette\Application\UI\Presenter
 {
     public function __construct(
         private PostFacade $facade,
+        private CommentFacade $cfacade,
     ) {
     }
 
@@ -64,7 +66,7 @@ final class PostPresenter extends Nette\Application\UI\Presenter
     public function handleDelete(int $id): void
     {
         $this->facade->deletePost($id);
-        $this->flashMessage('Mod was deleted.', 'success');
+        $this->flashMessage('Post was deleted.', 'success');
         $this->redirect('this');
     }
 
@@ -86,7 +88,7 @@ final class PostPresenter extends Nette\Application\UI\Presenter
         // Add a hidden field to store user_id
         $form->addHidden('user_id')->setDefaultValue($userId);
 
-        $form->addSubmit('send', 'Uložit a publikovat');
+        $form->addSubmit('send', 'Save and Publish');
         $form->onSuccess[] = $this->postFormSucceeded(...);
 
         return $form;
@@ -139,22 +141,32 @@ final class PostPresenter extends Nette\Application\UI\Presenter
             ->setDefaults($post->toArray());
     }
 
-
-    /* Comments */
+    /* Comments Section */
 
     protected function createComponentCommentForm(): Form
     {
         $form = new Form; // means Nette\Application\UI\Form
 
-        $form->addText('name', 'Name:')
-            ->setRequired();
+        // Get email from user identity (assuming it's available)
+        $identity = $this->getUser()->getIdentity(); // Adjust this based on your application's authentication logic
 
-        $form->addEmail('email', 'E-mail:');
+        $form->addHidden('user_id', 'Id:')
+            ->setRequired()
+            ->setDefaultValue($identity ? $identity->id : '');
+
+        $form->addHidden('nickname', 'Nickname:')
+            ->setRequired()
+            ->setDefaultValue($identity ? $identity->nickname : '');
+
+
+        $form->addHidden('email', 'E-mail:')
+            ->setRequired()
+            ->setDefaultValue($identity ? $identity->email : ''); // Set default value from identity, if available
 
         $form->addTextArea('content', 'Comment:')
             ->setRequired();
 
-        $form->addSubmit('send', 'Publikovat komentář');
+        $form->addSubmit('send', 'Comment on this post');
 
         $form->onSuccess[] = $this->commentFormSucceeded(...);
 
@@ -163,16 +175,52 @@ final class PostPresenter extends Nette\Application\UI\Presenter
 
     private function commentFormSucceeded(\stdClass $data): void
     {
-        $postId = $this->getParameter('id');
+        try {
+            $id = $this->getParameter('id');
 
-        $this->database->table('comments')->insert([
-            'post_id' => $postId,
-            'name' => $data->name,
-            'email' => $data->email,
-            'content' => $data->content,
-        ]);
+            $this->cfacade->insertComment([
+                'post_id' => $id,
+                'user_id' => $data->user_id,
+                'name' => $data->nickname,
+                'email' => $data->email,
+                'content' => $data->content,
+            ]);
 
-        $this->flashMessage('Děkuji za komentář', 'success');
+            $this->flashMessage('Thank you for your comment.', 'success');
+        } catch (\Exception $e) {
+            $this->flashMessage('There was an error creating the comment: ' . $e->getMessage(), 'error');
+        }
+
+        $this->redirect('this');
+    }
+
+    /* Deletion of Comments */
+    public function handleDeleteComment($commentId): void
+    {
+        // Get the current user (assuming you have some way to retrieve the logged-in user)
+        $currentUser = $this->getUser();
+
+        // Retrieve the comment from the database
+        $comment = $this->cfacade->getCommentById($commentId);
+
+        if (!$comment) {
+            $this->flashMessage('Comment not found.', 'error');
+        } else {
+            // Check if the current user is the owner of the comment
+            if ($currentUser->isLoggedIn() && ($currentUser->getId() === $comment->user_id)) {
+                $this->cfacade->deleteComment($commentId);
+                $this->flashMessage('Comment was deleted.', 'success');
+            } elseif ($currentUser->isInRole('admin') || $currentUser->isInRole('moderator')) {
+                // Check if the current user is an admin or moderator
+                $this->cfacade->deleteComment($commentId);
+                $this->flashMessage('Comment was deleted as admin/moderator.', 'success');
+            } else {
+                // Unauthorized deletion attempt
+                $this->flashMessage('You are not authorized to delete this comment.', 'error');
+            }
+        }
+
+        // Redirect back to the current page
         $this->redirect('this');
     }
 }

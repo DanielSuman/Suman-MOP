@@ -2,36 +2,39 @@
 
 {* <a n:href="Edit:create" n:if="$user->isLoggedIn()">Write an Article</a> *}
 
-<h1>Blog</h1>
+<div class="main-panel">
 
-<div class="pagination">
-	{if !$paginator->isFirst()}
-		<a n:href="default, 1">First</a>
-		&nbsp;|&nbsp;
-		<a n:href="default, $paginator->page-1">Previous</a>
-		&nbsp;|&nbsp;
-	{/if}
+	<h1>Blog</h1>
 
-	Page {$paginator->getPage()} of {$paginator->getPageCount()}
+	<div class="pagination">
+		{if !$paginator->isFirst()}
+			<a n:href="default, 1">First</a>
+			&nbsp;|&nbsp;
+			<a n:href="default, $paginator->page-1">Previous</a>
+			&nbsp;|&nbsp;
+		{/if}
 
-	{if !$paginator->isLast()}
-		&nbsp;|&nbsp;
-		<a n:href="default, $paginator->getPage() + 1">Next</a>
-		&nbsp;|&nbsp;
-		<a n:href="default, $paginator->getPageCount()">Last</a>
-	{/if}
-</div>
+		Page {$paginator->getPage()} of {$paginator->getPageCount()}
 
-{foreach $posts as $post}
-	<div class="post">
-
-		<h2><a href="{link Post:show $post->id}">{$post->title}</a></h2>
-
-		<img src="{$basePath}/{$post->image}" alt="Obrázek k článku {$post->title}">
-		
-		<div>{$post->content|truncate:256}</div>
-		
-		<div class="date"><strong>{$post->created_at|date:'D. F j, Y'}</strong></div>
+		{if !$paginator->isLast()}
+			&nbsp;|&nbsp;
+			<a n:href="default, $paginator->getPage() + 1">Next</a>
+			&nbsp;|&nbsp;
+			<a n:href="default, $paginator->getPageCount()">Last</a>
+		{/if}
 	</div>
-	{/foreach}
 
+	{foreach $posts as $post}
+		<div class="post">
+
+			<h2><a href="{link Post:show $post->id}">{$post->title}</a></h2>
+
+			<img src="{$basePath}/{$post->image}" alt="Obrázek k článku {$post->title}">
+			
+			<div>{$post->content|truncate:256}</div>
+			
+			<div class="date"><strong>{$post->created_at|date:'D. F j, Y'}</strong></div>
+		</div>
+		{/foreach}
+
+</div>

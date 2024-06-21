@@ -29,6 +29,20 @@ final class GameFacade
         return $game;
     }
 
+    public function deleteGame($gameId)
+    {
+        $game = $this->database
+            ->table('games')
+            ->get($gameId);
+    
+        if ($game) {
+            $game->delete();
+            return true; // Return true to indicate successful deletion
+        }
+    
+        return false; // Return false if the mod was not found
+    }
+
     public function getPublishedGames()
     {
         return $this->database
@@ -45,4 +59,8 @@ final class GameFacade
         return $game;
     }
 
+    public function getAll()
+    {
+        return $this->database->table('games')->fetchAll();
+    }
 }

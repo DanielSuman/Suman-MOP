@@ -1,8 +1,8 @@
 {block content}
 
 <div class="main-panel">
-    <p><a n:href="Game:default">← back to games list</a></p>
-    
+    <p><a n:href="Game:default">← back to games grid</a></p>
+
     {if $game->image}
         <img src="{$basePath}/{$game->image}" alt="Thumbnail">
     {/if}
@@ -15,7 +15,7 @@
 
     <div class="game">{$game->description}</div>
 
-    {if $game->store_link && $user->isLoggedIn()}
+    {if $game->store_link}
         <h2><a href='{$game->store_link}' target="blank"><strong>BUY THE GAME HERE</strong></a></h2>
     {/if}
 
