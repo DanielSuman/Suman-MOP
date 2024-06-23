@@ -47,7 +47,7 @@
 	<script src="https://cdn.jsdelivr.net/npm/bootstrap-select@1.13.15/dist/js/bootstrap-select.js"></script>
 	<div n:foreach="$flashes as $flash" n:class="flash, $flash->type">{$flash->message}</div>
 	{*<h1>Admin</h1>*}
-	{if ($user->isLoggedIn() && $user->isInRole('admin'))}
+	{if ($user->isLoggedIn() && $user->isInRole('admin') || $user->isInRole('moderator'))}
 		<div class="header">
         <div class="inner_header">
             <div class="logo_container"></div>

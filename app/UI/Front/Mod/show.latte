@@ -6,7 +6,9 @@
     <h1 n:block="name">{$mod->name}</h1>
 
     {if $mod->image}
-        <img src="{$basePath}/{$mod->image}" alt="Thumbnail">
+        <div><img src="{$basePath}/{$mod->image}" alt="Thumbnail"></div>
+    {else}
+        <div><img src="{$basePath}/img/unavailable/notfound.png" alt="Thumbnail"></div>
     {/if}
 
     <div class="mod">{$mod->description}</div>

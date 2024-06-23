@@ -24,7 +24,7 @@ final class UserPresenter extends Nette\Application\UI\Presenter
         }
 
         // Check if the user is an admin
-        if (!$this->getUser()->isInRole('admin')) {
+        if (!$this->getUser()->isInRole('admin') || !$this->getUser()->isInRole('admin')) {
             $this->redirect(':Front:Home:'); // redirect to the front module
         }
     }

@@ -8,20 +8,24 @@
     list-style: none;
     text-decoration: none;
 }
-/*
+body {
+    background-color: black;
+}
+
 body {
     background-color: black;
     background-image: url("../img/bg.jpeg");
     background-size: cover;
     background-repeat: no-repeat;
     background-attachment: fixed; 
-}*/
+}
 
 
 .main-panel {
     margin: 0 auto;
     width: 1200px;
-    background-color: rgba(0, 0, 0, 0.381);
+    background-color: rgba(0, 0, 0, 0.596);
+    padding: 0 1%;
 }
 
 .header {
@@ -92,8 +96,9 @@ body {
 }
 
 .wrapper {
-    width:80%;
-    max-width: 1080;
+    width:90%;
+    max-width: 1100;
+    padding: 0 5%;
     margin: 0 auto;
     background-color: hsla(0, 0%, 0%, 0.222);
     border-left: 1px solid black;
@@ -103,31 +108,93 @@ body {
 
 .items_grid {
     display: grid; /* Použijeme grid layout pro mřížku */
-    grid-template-columns: repeat(auto-fill, minmax(150px, 1fr)); /* Automatické rozdělení na sloupce, minimálně 150px široké */
-    gap: 10px; /* Mezera mezi položkami */
+    grid-template-columns: repeat(auto-fill, minmax(400px, 1fr)); /* Automatické rozdělení na sloupce, minimálně 150px široké */
+    justify-content: center;
+    gap: 5px; 
 }
 
 .item {
-    background-color: rgba(0, 0, 0, 0.25); /* Černé pozadí s průhledností 25% */
-    width: 100%; /* Šířka 100% */
-    padding-top: 100%; /* Výška bude odpovídat šířce, což vytvoří čtvercový tvar */
+    background-color: rgba(0, 0, 0, 0.571); /* Černé pozadí s průhledností 25% */
+    width: 95%; /* Šířka 100% */
     position: relative;
+    padding: 2%;
+    border-radius: 10px;
 }
-.item p {
+.item_description {
+    width: 440px;
+    height: 85px;
+    position: absolute;
+    top: 35px;
+    right: 10px;
+    float:left;
+}
+.item_description p {
+    width: 100%;
     color: white;
-    font-family: COD;
+    font-family: Arial, Helvetica, sans-serif;
+}
+.category_description {
+    color: white;
 }
 
 .item_icon_container {
+    background-color: rgba(0, 0, 0, 0.197);
+    border-radius: 10px;
+    height: 100px;
+    width:100px;
+    padding: 2%;
+    float:left;
+}
+.item_title {
     position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
+    width: 440px;
+    top: 5px;
+    right: 10px;
+    text-align: left;
+}
+.item_title h2 a{
+    color:rgb(10, 203, 52);
+    text-decoration: none;
 }
 
 .item_icon_container img {
     max-width: 100%;
     max-height: 100%;
+}
+.item_date {
+    position:absolute;
+    color: white;
+    bottom: 5px;
+    right: 10px;
+}
+
+.paginator-pagination {
+    background-color: rgba(0, 0, 0, 0.615);
+    text-align: center;
+    margin: 0 auto;
+    width: 400px;
+    height: 20px;
+    border-radius: 20px;
+}
+.paginator-pagination p {
+    color: white;
+}
+.paginator-pagination a {
+    color: white;
+}
+.centered_title {
+    color: white;
+    text-align: center;
+}
+.centered_title a {
+    color: white;
+    text-decoration: none;
+}
+.green {
+    color: greenyellow;
+}
+.white a{
+    color: white;
 }
 
 
@@ -141,6 +208,3 @@ body {
     text-align: center;
 }
 
-.pagination {
-    text-align: center;
-}

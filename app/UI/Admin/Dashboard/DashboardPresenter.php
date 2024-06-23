@@ -22,8 +22,8 @@ final class DashboardPresenter extends Nette\Application\UI\Presenter
             $this->redirect('Sign:in'); // redirect to the login page
         }
 
-        // Check if the user is an admin
-        if (!$this->getUser()->isInRole('admin')) {
+        // Check if the user is an admin or a moderator
+        if (!$this->getUser()->isInRole('admin') && !$this->getUser()->isInRole('moderator')) {
             $this->redirect(':Front:Home:'); // redirect to the front module
         }
     }

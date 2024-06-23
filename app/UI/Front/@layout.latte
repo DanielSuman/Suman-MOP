@@ -6,9 +6,7 @@
 	<link rel="stylesheet" href="{$basePath}/css/style.css">
 	<title>{ifset title}{include title|stripHtml} | {/ifset}Nette Web</title>
 </head>
-
 <body>
-	
 	{*<h1>Front</h1>*}
 	<div class="header">
         <div class="inner_header">
@@ -18,7 +16,7 @@
                 <li><a>Browse</a>
                     <ul class="sub-navigation">
                      {* <li><a href="https://store.steampowered.com/app/550/Left_4_Dead_2/">Steam Store Page</a></li> *}   
-						{if ($user->isLoggedIn() && $user->isInRole('admin'))}
+						{if ($user->isLoggedIn() && $user->isInRole('admin') || $user->isInRole('moderator'))}
 						<li><a n:href=":Admin:Home:">Switch to Admin</a></li>
 						{/if}
                         <li><a n:href="Post:">Blog</a></li>
@@ -44,6 +42,9 @@
 	
 	{include content}
 
+	<div class="footer">
+        <p>End</p>
+    </div>
 	{block scripts}
 	<script src="https://unpkg.com/nette-forms@3/src/assets/netteForms.js"></script>
 	{/block}

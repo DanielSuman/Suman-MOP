@@ -16,14 +16,20 @@
 
 {control commentForm}
 
-<h2>Komentáře</h2>
+<h2>Comments Section</h2>
 
 <div class="comments">
-	{foreach $comments as $comment}
-		<p><b><a href="mailto:{$comment->email}" n:tag-if="$comment->email">
-			{$comment->name}
-		</a></b> napsal:</p>
+    {foreach $comments as $comment}
+		<div class="comment-box">
 
-		<div>{$comment->content}</div>
-	{/foreach}
+			{if $user->isLoggedIn() && ($user->id === $comment->user_id || $user->isInRole('admin') || $user->isInRole('moderator'))}
+            	<a n:href="deleteComment! $comment->id" class="btn btn-danger delete-btn">Delete</a>
+        	{/if}
+        	<p><b><a href="mailto:{$comment->email}" n:tag-if="$comment->email">
+            	{$comment->name}
+        	</a></b> wrote:</p>
+
+			<div>{$comment->content}</div>
+		</div>
+    {/foreach}
 </div>

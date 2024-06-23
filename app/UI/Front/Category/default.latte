@@ -1,12 +1,16 @@
 {* This is the welcome page, you can delete it *}
 
 {block content}
-<h1>Categories</h1>
 
-{foreach $categories as $category}
-	<div class="category">
-		<h2><a href="{link Category:show $category->id}">{$category->name}</a></h2>
+<div class="main-panel">
+	<h1 class="centered_title">Categories</h1>
+	{foreach $categories as $category}
+		<div class="item">
+			<h2 class="white"><a href="{link Category:show $category->id}">{$category->name}</a></h2>
 
-		<div>{$category->description|truncate:256}</div>
-	</div>
+			<div class="category_description">{$category->description|truncate:256}</div>
+		</div><br>
 	{/foreach}
+</div>
+
+
