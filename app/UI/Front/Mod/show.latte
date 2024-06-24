@@ -1,24 +1,26 @@
 {block content}
 
 <div class="main-panel">
-    <p><a n:href="Mod:default">← back to mods list</a></p>
+    <p><a n:href="Mod:default">← back to mods list</a></p><br>
+    <div class="show_item">
+        {if $mod->image}
+            <div class="show_item_icon_container"><img src="{$basePath}/{$mod->image}" alt="Thumbnail"></div>
+        {else}
+            <div class="show_item_icon_container">><img src="{$basePath}/img/unavailable/notfound.png" alt="Thumbnail"></div>
+        {/if}
+        <div class="show_item_title"><h1 n:block="name">{$mod->name}</h1></div>
+        <div class="show_mod_description">{$mod->description}</div>
 
-    <h1 n:block="name">{$mod->name}</h1>
+        {if $mod->vidprev}
+            <h2>Preview video:</h2>
+            <iframe width="560" height="315" src="{$mod->vidprev}" frameborder="0" allowfullscreen></iframe>
+        {/if}
 
-    {if $mod->image}
-        <div><img src="{$basePath}/{$mod->image}" alt="Thumbnail"></div>
-    {else}
-        <div><img src="{$basePath}/img/unavailable/notfound.png" alt="Thumbnail"></div>
-    {/if}
+        <div class="show_item_date">Created on <strong>{$mod->created_at|date:'D. F j, Y'} | {$mod->mod_category}</strong></div>
+    </div>
+    
 
-    <div class="mod">{$mod->description}</div>
 
-    {if $mod->vidprev}
-        <h2>Preview video:</h2>
-        <iframe width="560" height="315" src="{$mod->vidprev}" frameborder="0" allowfullscreen></iframe>
-    {/if}
-
-    <div class="date">Created on <strong>{$mod->created_at|date:'D. F j, Y'}</strong></div>
 
         {if $user->isLoggedIn()}
         <h2>Comment on this post</h2>
@@ -29,6 +31,7 @@
         <h2>Comments Section</h2>
 
     <div class="comments">
+        <p>
         {foreach $comments as $comment}
             {if $user->isLoggedIn() && ($user->id === $comment->user_id || $user->isInRole('admin') || $user->isInRole('moderator'))}
                 <a n:href="deleteComment! $comment->id" class="btn btn-danger">Delete</a>
@@ -40,5 +43,6 @@
             <div>{$comment->content}</div>
 
         {/foreach}
+        </p>
     </div>
 </div>
