@@ -96,6 +96,8 @@ final class ModPresenter extends Nette\Application\UI\Presenter
         $form->addUpload('image', 'Mod Thumbnail')
             ->setRequired()
             ->addRule(Form::IMAGE, 'Thumbnail must be JPEG, PNG or GIF');
+        $form->addText('mod_url', 'Mod Webpage (Steam URL):')
+            ->setRequired();
         $form->addText('vidprev', 'Video Preview (YouTube Embed URL):');
 
         $form->addSubmit('send', 'Save and Publish');

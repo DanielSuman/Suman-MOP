@@ -12,8 +12,10 @@
         <div class="show_mod_description">{$mod->description}</div>
 
         {if $mod->vidprev}
-            <h2>Preview video:</h2>
-            <iframe width="560" height="315" src="{$mod->vidprev}" frameborder="0" allowfullscreen></iframe>
+            <div class="show_item_vidprev">
+                <h2>Preview video:</h2>
+                <iframe width="560" height="315" src="{$mod->vidprev}" frameborder="0" allowfullscreen></iframe>
+            </div>
         {/if}
 
         <div class="show_item_date">Created on <strong>{$mod->created_at|date:'D. F j, Y'} | {$mod->mod_category}</strong></div>

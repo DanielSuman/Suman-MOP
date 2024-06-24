@@ -140,9 +140,9 @@ body {
 .item_icon_container {
     background-color: rgba(0, 0, 0, 0.197);
     border-radius: 10px;
-    height: 100px;
-    width:100px;
-    padding: 2%;
+    height: 120px;
+    width:120px;
+    padding: 0.5%;
     float:left;
 }
 .item_title {
@@ -172,10 +172,17 @@ body {
     background-color: rgba(0, 0, 0, 0.571);
     border-radius: 10px;
     width: 1100px;
-    height: 300px;
+    height: 580px;
     padding: 0.5%;
     margin: 0 auto;
     position:relative;
+}
+.show_item_vidprev {
+    position: absolute;
+    left: 10px;
+    bottom: 10%;
+    color: white;
+    top: 240px;
 }
 .show_item_title {
     position: absolute;
