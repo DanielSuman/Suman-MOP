@@ -96,6 +96,7 @@ final class ModPresenter extends Nette\Application\UI\Presenter
         $form->addUpload('image', 'Mod Thumbnail')
             ->setRequired()
             ->addRule(Form::IMAGE, 'Thumbnail must be JPEG, PNG or GIF');
+        
         $form->addText('mod_url', 'Mod Webpage (Steam URL):')
             ->setRequired();
         $form->addText('vidprev', 'Video Preview (YouTube Embed URL):');
@@ -109,28 +110,16 @@ final class ModPresenter extends Nette\Application\UI\Presenter
     private function modFormSucceeded($form, $data): void
     {   
         $id = $this->getParameter('id');
-
+        $uniqId = uniqid();
         if (filesize($data->image) > 0) {
             if ($data->image->isOk()) {
                 // Extract the file extension
-                $extension = pathinfo($data->image->getSanitizedName(), PATHINFO_EXTENSION);
-
-                // Define the new file name as "thumbnail" with the original extension
-                $newFileName = 'thumbnail.' . $extension;
-                bdump($id);
-                // Define the upload path
-                $uploadPath = 'upload/mods/' . $id . '/' . $newFileName;
-
-                // Move the uploaded file to the new location with the new file name
-                $data->image->move($uploadPath);
-
-                // Update the image path in the $data array
-                $data['image'] = $uploadPath;
+                $data->image->move('upload/mods/' . $uniqId . '/' . $data->image->getSanitizedName());
+                $data['image'] = 'upload/mods/' . $uniqId . '/'. $data->image->getSanitizedName();
             } else {
                 $this->flashMessage('File was not added', 'failed');
             }
         }
-
         if ($id) {
             $mod = $this->facade->editMod($id, (array) $data);
         } else {
