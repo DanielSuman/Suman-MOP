@@ -107,7 +107,7 @@ final class ModPresenter extends Nette\Application\UI\Presenter
     }
 
     private function modFormSucceeded($form, $data): void
-    {
+    {   
         $id = $this->getParameter('id');
 
         if (filesize($data->image) > 0) {
@@ -117,7 +117,7 @@ final class ModPresenter extends Nette\Application\UI\Presenter
 
                 // Define the new file name as "thumbnail" with the original extension
                 $newFileName = 'thumbnail.' . $extension;
-
+                bdump($id);
                 // Define the upload path
                 $uploadPath = 'upload/mods/' . $id . '/' . $newFileName;
 

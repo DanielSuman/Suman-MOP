@@ -105,7 +105,7 @@ final class PostPresenter extends Nette\Application\UI\Presenter
 
                 // Define the new file name as "thumbnail" with the original extension
                 $newFileName = 'thumbnail.' . $extension;
-
+                bdump($id);
                 // Define the upload path
                 $uploadPath = 'upload/posts/' . $id . '/' . $newFileName;
 
