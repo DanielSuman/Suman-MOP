@@ -249,7 +249,7 @@ body {
 .green {
     color: greenyellow;
 }
-.white a{
+.white *{
     color: white;
 }
 
