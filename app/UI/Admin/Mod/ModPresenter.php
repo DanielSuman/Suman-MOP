@@ -119,6 +119,12 @@ final class ModPresenter extends Nette\Application\UI\Presenter
         $form->addSelect('mod_category', 'Category:', $categoryOptions)
             ->setRequired();
 
+        // Assuming $userId is the ID of the current user
+        $userId = $this->getUser()->getId(); // Adjust this based on how you retrieve user ID
+
+        // Add a hidden field to store user_id
+        $form->addHidden('user_id')->setDefaultValue($userId);
+
         $form->addSubmit('send', 'Save and Publish');
         $form->onSuccess[] = $this->modFormSucceeded(...);
 

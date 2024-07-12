@@ -17,8 +17,7 @@ final class CategoryPresenter extends Nette\Application\UI\Presenter
     public function renderDefault(): void
     {
         $categories = $this->facade
-            ->getAllCategories()
-            ->limit(5);
+            ->getAllCategories();
 
         bdump($categories);
 

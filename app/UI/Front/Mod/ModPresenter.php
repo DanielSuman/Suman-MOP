@@ -26,7 +26,7 @@ final class ModPresenter extends Nette\Application\UI\Presenter
         // Vyrobíme si instanci Paginatoru a nastavíme jej
         $paginator = new Nette\Utils\Paginator;
         $paginator->setItemCount($modsCount); // celkový počet článků
-        $paginator->setItemsPerPage(30); // počet položek na stránce
+        $paginator->setItemsPerPage(16); // počet položek na stránce
         $paginator->setPage($page); // číslo aktuální stránky
 
         // Z databáze si vytáhneme omezenou množinu článků podle výpočtu Paginatoru
