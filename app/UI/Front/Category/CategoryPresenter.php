@@ -4,12 +4,13 @@ namespace App\UI\Front\Category;
 
 use Nette;
 use App\Model\CategoryFacade;
-use Nette\Application\UI\Form;
+use App\Model\ModFacade;
 
 final class CategoryPresenter extends Nette\Application\UI\Presenter
 {
     public function __construct(
         private CategoryFacade $facade,
+        private ModFacade $mfacade,
     ) {
     }
 
@@ -32,6 +33,10 @@ final class CategoryPresenter extends Nette\Application\UI\Presenter
             $this->error('Category not found');
         }
 
+        // Get mods by category ID
+        $mods = $this->mfacade->getModsByCategoryId($id);
+
         $this->template->category = $category;
+        $this->template->mods = $mods;
     }
 }

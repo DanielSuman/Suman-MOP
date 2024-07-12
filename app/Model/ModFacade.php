@@ -74,4 +74,11 @@ final class ModFacade
     {
         return $this->database->table('mods')->fetchAll();
     }
+
+    public function getModsByCategoryId(int $categoryId)
+    {
+        return $this->database->table('mods')
+            ->where('mod_category', $categoryId)
+            ->fetchAll();
+    }
 }

@@ -4,6 +4,7 @@ namespace App\UI\Admin\Mod;
 
 use Nette;
 use App\Model\ModFacade;
+use App\Model\CategoryFacade;
 use Ublaboo\DataGrid\DataGrid;
 use Nette\Application\UI\Form;
 
@@ -11,6 +12,7 @@ final class ModPresenter extends Nette\Application\UI\Presenter
 {
     public function __construct(
         private ModFacade $facade,
+        private CategoryFacade $catfacade,
     ) {
     }
 
@@ -89,6 +91,15 @@ final class ModPresenter extends Nette\Application\UI\Presenter
     {
         $form = new Form;
 
+        // Fetch all categories from the CategoryFacade
+        $categories = $this->catfacade->getAll(); // This should return an array of categories
+
+        // Create an associative array for the dropdown
+        $categoryOptions = [];
+        foreach ($categories as $category) {
+            $categoryOptions[$category['id']] = $category['name'];
+        }
+
         $form->addText('name', 'Mod Name:')
             ->setRequired();
 
@@ -98,11 +109,15 @@ final class ModPresenter extends Nette\Application\UI\Presenter
         $form->addUpload('image', 'Mod Thumbnail')
             ->setRequired()
             ->addRule(Form::IMAGE, 'Thumbnail must be JPEG, PNG or GIF');
-        
+
         $form->addText('mod_url', 'Mod Webpage (Steam URL):')
             ->setRequired();
-            
+
         $form->addText('vidprev', 'Video Preview (YouTube Embed URL):');
+
+        // Add a select dropdown to the form
+        $form->addSelect('mod_category', 'Category:', $categoryOptions)
+            ->setRequired();
 
         $form->addSubmit('send', 'Save and Publish');
         $form->onSuccess[] = $this->modFormSucceeded(...);
@@ -111,14 +126,14 @@ final class ModPresenter extends Nette\Application\UI\Presenter
     }
 
     private function modFormSucceeded($form, $data): void
-    {   
+    {
         $id = $this->getParameter('id');
         $uniqId = uniqid();
         if (filesize($data->image) > 0) {
             if ($data->image->isOk()) {
                 // Extract the file extension
                 $data->image->move('upload/mods/' . $uniqId . '/' . $data->image->getSanitizedName());
-                $data['image'] = 'upload/mods/' . $uniqId . '/'. $data->image->getSanitizedName();
+                $data['image'] = 'upload/mods/' . $uniqId . '/' . $data->image->getSanitizedName();
             } else {
                 $this->flashMessage('File was not added', 'failed');
             }
@@ -129,7 +144,7 @@ final class ModPresenter extends Nette\Application\UI\Presenter
             $mod = $this->facade->insertMod((array) $data);
         }
 
-    //    $this->flashMessage('Mod has been published successfully.', 'success');
+        //    $this->flashMessage('Mod has been published successfully.', 'success');
         $this->redirect('Mod:show', $mod->id);
     }
 

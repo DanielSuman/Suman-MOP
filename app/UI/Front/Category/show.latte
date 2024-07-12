@@ -1,7 +1,28 @@
 {block content}
 
-<p><a n:href="Category:default">← back to category list</a></p>
+<div class="main-panel white">
+    <h1>{$category->name}</h1>
+    <p><a n:href="Category:default">← back to category list</a></p>
+	<div class="items_grid white">
+		{foreach $mods as $mod}
+			<div class="item">
 
-<h1 n:block="name">{$category->name}</h1>
+				{if $mod->image}
+					<div class="item_icon_container"><img src="{$basePath}/{$mod->image}" alt="Thumbnail"></div>
+				{else}
+					<div class="item_icon_container"><img src="{$basePath}/img/unavailable/notfound.png" alt="Thumbnail"></div>
+				{/if}
 
-<div class="category">{$category->description}</div>
+				<div class="item_title"><h2><a href="{link Mod:show $mod->id}">{$mod->name|truncate:50}</a></h2></div>
+				
+				<div class="item_description">
+					<p>{$mod->description|truncate:200}</p>
+				</div>
+
+				<div class="item_date">Created on {$mod->created_at|date:'D. F j, Y'} | {$mod->mod_category} | <a class="green" href="{link Mod:show $mod->id}">Visit Mod Page</a></div>
+			</div>
+		{/foreach}
+		<br>
+	</div>
+</div>
+{/block}
