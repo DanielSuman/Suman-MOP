@@ -94,38 +94,27 @@ final class PostPresenter extends Nette\Application\UI\Presenter
         return $form;
     }
 
+
     private function postFormSucceeded($form, $data): void
     {
         $id = $this->getParameter('id');
-
+        $uniqId = uniqid();
         if (filesize($data->image) > 0) {
             if ($data->image->isOk()) {
                 // Extract the file extension
-                $extension = pathinfo($data->image->getSanitizedName(), PATHINFO_EXTENSION);
-
-                // Define the new file name as "thumbnail" with the original extension
-                $newFileName = 'thumbnail.' . $extension;
-                bdump($id);
-                // Define the upload path
-                $uploadPath = 'upload/posts/' . $id . '/' . $newFileName;
-
-                // Move the uploaded file to the new location with the new file name
-                $data->image->move($uploadPath);
-
-                // Update the image path in the $data array
-                $data['image'] = $uploadPath;
+                $data->image->move('upload/posts/' . $uniqId . '/' . $data->image->getSanitizedName());
+                $data['image'] = 'upload/posts/' . $uniqId . '/' . $data->image->getSanitizedName();
             } else {
                 $this->flashMessage('File was not added', 'failed');
             }
         }
-
         if ($id) {
             $post = $this->facade->editPost($id, (array) $data);
         } else {
             $post = $this->facade->insertPost((array) $data);
         }
 
-        $this->flashMessage('Příspěvek byl úspěšně publikován.', 'success');
+        //    $this->flashMessage('Mod has been published successfully.', 'success');
         $this->redirect('Post:show', $post->id);
     }
 

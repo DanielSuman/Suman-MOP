@@ -96,8 +96,10 @@ final class GamePresenter extends Nette\Application\UI\Presenter
 
         $form->addTextArea('description', 'Description:')
             ->setRequired();
-        
+
         $form->addTextArea('trailer', 'Trailer:');
+
+        $form->addTextArea('store_link', 'Store link:');
 
         $form->addSubmit('send', 'Save and Publish');
         $form->onSuccess[] = $this->gameFormSucceeded(...);
@@ -108,35 +110,23 @@ final class GamePresenter extends Nette\Application\UI\Presenter
     private function gameFormSucceeded($form, $data): void
     {
         $id = $this->getParameter('id');
-    
+        $uniqId = uniqid();
         if (filesize($data->image) > 0) {
             if ($data->image->isOk()) {
                 // Extract the file extension
-                $extension = pathinfo($data->image->getSanitizedName(), PATHINFO_EXTENSION);
-
-                // Define the new file name as "thumbnail" with the original extension
-                $newFileName = 'thumbnail.' . $extension;
-
-                // Define the upload path
-                $uploadPath = 'upload/games/' . $id . '/' . $newFileName;
-
-                // Move the uploaded file to the new location with the new file name
-                $data->image->move($uploadPath);
-
-                // Update the image path in the $data array
-                $data['image'] = $uploadPath;
+                $data->image->move('upload/games/' . $uniqId . '/' . $data->image->getSanitizedName());
+                $data['image'] = 'upload/games/' . $uniqId . '/' . $data->image->getSanitizedName();
             } else {
                 $this->flashMessage('File was not added', 'failed');
             }
         }
-    
         if ($id) {
             $game = $this->facade->editGame($id, (array) $data);
         } else {
             $game = $this->facade->insertGame((array) $data);
         }
 
-        $this->flashMessage('Game has been published successfullly.', 'success');
+        //    $this->flashMessage('Mod has been published successfully.', 'success');
         $this->redirect('Game:show', $game->id);
     }
 
@@ -151,5 +141,4 @@ final class GamePresenter extends Nette\Application\UI\Presenter
         $this->getComponent('gameForm')
             ->setDefaults($game->toArray());
     }
-
 }

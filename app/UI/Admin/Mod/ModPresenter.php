@@ -129,7 +129,7 @@ final class ModPresenter extends Nette\Application\UI\Presenter
             $mod = $this->facade->insertMod((array) $data);
         }
 
-        $this->flashMessage('Mod has been published successfully.', 'success');
+    //    $this->flashMessage('Mod has been published successfully.', 'success');
         $this->redirect('Mod:show', $mod->id);
     }
 
