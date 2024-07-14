@@ -4,7 +4,7 @@
 
 <div class="main-panel white">
 
-	<h1>Blog</h1>
+	<h1 class="centered_title">Blog</h1><br>
 
 	<div class="paginator-pagination">
 		
@@ -33,19 +33,58 @@
 			&nbsp;|&nbsp;
 			<a href="#" style="color:gray;">Last</a>
 		{/if}
-	</div>
+	</div><br>
+	<div class="items_grid">
+		{foreach $posts as $post}
+			<div class="item">
 
-	{foreach $posts as $post}
-		<div class="post">
+				{if $post->image}
+					<div class="item_icon_container"><img src="{$basePath}/{$post->image}" alt="Thumbnail"></div>
+				{else}
+					<div class="item_icon_container"><img src="{$basePath}/img/unavailable/notfound.png" alt="Thumbnail"></div>
+				{/if}
 
-			<h2><a href="{link Post:show $post->id}">{$post->title}</a></h2>
+				<div class="item_title"><h2><a href="{link Post:show $post->id}">{$post->title|truncate:90}</a></h2></div>
+				
+				<div class="item_description">
+					<p>{$post->content|truncate:200}</p>
+				</div>
 
-			<img src="{$basePath}/{$post->image}" alt="Obrázek k článku {$post->title}">
+				<div class="item_date">Created on {$post->created_at|date:'D. F j, Y'} | <a class="green" href="{link Post:show $post->id}">View Post</a></div>
 			
-			<div>{$post->content|truncate:256}</div>
-			
-			<div class="date"><strong>{$post->created_at|date:'D. F j, Y'}</strong></div>
-		</div>
+			</div>
 		{/foreach}
+	</div>
+	<br>
+	<div class="paginator-pagination">
+		<p>
+			{if !$paginator->isFirst()}
+				<a n:href="default, 1">First</a>
+				&nbsp;|&nbsp;
+				<a n:href="default, $paginator->page-1">Previous</a>
+				&nbsp;|&nbsp;
+			{else}
+				<a href="#" style="color:gray;">First</a>
+				&nbsp;|&nbsp;
+				<a href="#" style="color:gray;">Previous</a>
+				&nbsp;|&nbsp;
+			{/if}
+
+			Page {$paginator->getPage()} of {$paginator->getPageCount()}
+
+			{if !$paginator->isLast()}
+				&nbsp;|&nbsp;
+				<a n:href="default, $paginator->getPage() + 1">Next</a>
+				&nbsp;|&nbsp;
+				<a n:href="default, $paginator->getPageCount()">Last</a>
+			{else}
+				&nbsp;|&nbsp;
+				<a href="#" style="color:gray;">Next</a>
+				&nbsp;|&nbsp;
+				<a href="#" style="color:gray;">Last</a>
+			{/if}
+		</p>
+	</div><br>
+
 
 </div>

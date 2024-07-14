@@ -90,9 +90,9 @@ final class PostPresenter extends Nette\Application\UI\Presenter
                 'content' => $data->content,
             ]);
 
-            $this->flashMessage('Thank you for your comment.', 'success');
+        #    $this->flashMessage('Thank you for your comment.', 'success');
         } catch (\Exception $e) {
-            $this->flashMessage('There was an error creating the comment: ' . $e->getMessage(), 'error');
+        #    $this->flashMessage('There was an error creating the comment: ' . $e->getMessage(), 'error');
         }
 
         $this->redirect('this');

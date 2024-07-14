@@ -264,3 +264,13 @@ body {
     text-align: center;
 }
 
+.registration-column-left {
+    position:relative;
+    left: 2px;
+    top: 10px;
+    width: 300px;
+    background-color: rgba(137, 0, 0, 0.178);
+}
+.registration-column-left h2 {
+    color: white;
+}
