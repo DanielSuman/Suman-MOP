@@ -133,3 +133,50 @@ body {
     font-family: COD;
     text-align: center;
 }
+
+.main-panel {
+    min-height: 520px;
+}
+
+.centered_title {
+    text-align: center;
+}
+
+.registration-box {
+    margin: 0 auto;
+    height: 250px;
+    width: 810px;
+
+}
+.registration-column-left {
+    float:left;
+    width: 400px;
+}
+.registration-column-left h2 {
+    color: white;
+}
+.registration-column-right {
+    float: right;
+    width: 400px;
+}
+.registration-column-right, .registration-column-left {
+    padding: 4px;
+    border-radius: 2px;
+    background-color: rgba(0, 0, 0, 0.571);
+}
+.registration-column-right h2, label {
+    color: white;
+}
+
+.form-group {
+    width: 100%;
+}
+.form-group label {
+    float: left;
+}
+.form-group input {
+    float: right;
+}
+.form-group button {
+    float: right;
+}

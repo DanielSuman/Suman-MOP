@@ -1,9 +1,31 @@
-{* The sign-in page *}
-
 {block content}
-<h1 n:block=title>Sign In</h1>
+<div class="main-panel">
+    <br><h1 class="centered_title white" n:block=title>Sign In</h1><br>
 
-{* Include the generic form template for sign-in *}
-{include "../@form.latte", name: signInForm}
+    {* Include the generic form template for sign-in *}
+    {*
+    {include "../@form.latte", name: signInForm}
 
-<p class="text-center"><a n:href="up">Don't have an account yet? Sign up.</a></p>
+    <p class="text-center"><a n:href="up">Don't have an account yet? Sign up.</a></p> *}
+    <div class="registration-box-small">
+        <form n:name="signInForm">
+            <div class="registration-column-center">
+                <div class="form-group">
+                    <label for="firstname">Username:</label>
+                    <input type="text" n:name="username" id="username" required>
+                </div><br>
+                <div class="form-group">
+                    <label for="password">Password:</label>
+                    <input type="password" n:name="password" id="password" required>
+                </div><br><br>
+                <div class="form-group">
+                    <button type="submit" n:name="send">Sign in</button>
+                </div>
+                <p class="left white"><a n:href="up">Don't have an account yet? Sign up.</a></p> 
+            </div>
+        </form>
+    </div>
+
+</div>
+
+

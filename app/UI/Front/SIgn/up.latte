@@ -1,84 +1,82 @@
 {block content}
 <div class="main-panel">
 
-<h1 n:block=title class="centered_title white">Sign Up</h1>
+<br><br><br><h1 n:block=title class="centered_title white">Sign Up</h1><br>
 
 {* Include the generic form template for sign-up *}
-{* {include "../@form.latte", name: signUpForm}
+{*{include "../@form.latte", name: signUpForm}
 
 <p class="text-center white"><a n:href="in">Already have an account? Log in.</a></p> *}
 
-<form method="post" action="{link Sign:in}" name="signUpForm">
-    <div class="registration-column-left">
-        <h2 class="white">Personal</h2>
-        <div class="form-group">
-            <label for="firstname">First Name:</label>
-            <input type="text" name="firstname" id="firstname" required>
-        </div>
-        <div class="form-group">
-            <label for="middlename">Middle Name:</label>
-            <input type="text" name="middlename" id="middlename" required>
-        </div>
-        <div class="form-group">
-            <label for="lastname">Last Name:</label>
-            <input type="text" name="lastname" id="lastname" required>
-        </div>
-        <h2 class="white">Locational</h2>
-        <div class="form-group">
-            <label for="country">Country:</label>
-            <input type="text" name="region" id="region" required>
-        </div>
-        <div class="form-group">
-            <label for="region">Region:</label>
-            <input type="text" name="region" id="region" required>
-        </div>
-        <div class="form-group">
-            <label for="city">City:</label>
-            <input type="text" name="city" id="city" required>
-        </div>
-        <div class="form-group">
-            <label for="street">Street:</label>
-            <input type="text" name="street" id="street" required>
-        </div>
-        <div class="form-group">
-            <label for="zipcode">Zip Code:</label>
-            <input type="text" name="zipcode" id="zipcode" required>
-        </div>
-    </div>
-    <div class="registration-column-right">
-        <h2 class="white">Cosmetical</h2>
-        <div class="form-group">
-            <label for="nickname">Nickname:</label>
-            <input type="text" name="nickname" id="nickname" required>
-        </div>
-        <h2 class="white">Functional</h2>
-        <div class="form-group">
-            <label for="username">Pick a username:</label>
-            <input type="text" name="username" id="username" required>
-        </div>
-        <div class="form-group">
-            <label for="email">Your e-mail:</label>
-            <input type="email" name="email" id="email" required>
-        </div>
-        <div class="form-group">
-            <label for="phone">Phone:</label>
-            <input type="text" name="phone" id="phone" required>
-        </div>
-        <div class="form-group">
-            <label for="password">Create a password:</label>
-            <input type="password" name="password" id="password" required>
-        </div>
-        <div class="form-group">
-            <label for="role">Role:</label>
-            <input type="text" name="role" id="role" required>
-        </div>
 
-        <div class="form-group">
-            <button type="submit" name="send">Sign up</button>
+<form n:name="signUpForm">
+    <div class="registration-box">
+        <div class="registration-column-left">
+            <h2 class="white">Personal</h2>
+            <div class="form-group">
+                <label for="firstname">First Name:</label>
+                <input type="text" n:name="firstname" id="firstname" required>
+            </div><br>
+            <div class="form-group">
+                <label for="middlename">Middle Name:</label>
+                <input type="text" n:name="middlename" id="middlename" required>
+            </div><br>
+            <div class="form-group">
+                <label for="lastname">Last Name:</label>
+                <input type="text" n:name="lastname" id="lastname" required>
+            </div><br>
+            <h2 class="white">Locational</h2>
+            <div class="form-group">
+                <label for="country">Country:</label>
+                <input type="text" n:name="country" id="country" required>
+            </div><br>
+            <div class="form-group">
+                <label for="region">Region:</label>
+                <input type="text" n:name="region" id="region" required>
+            </div><br>
+            <div class="form-group">
+                <label for="city">City:</label>
+                <input type="text" n:name="city" id="city" required>
+            </div><br>
+            <div class="form-group">
+                <label for="street">Street:</label>
+                <input type="text" n:name="street" id="street" required>
+            </div><br>
+            <div class="form-group">
+                <label for="zipcode">Zip Code:</label>
+                <input type="text" n:name="zipcode" id="zipcode" required>
+            </div><br>
         </div>
-        
+        <div class="registration-column-right">
+            <h2 class="white">Cosmetical</h2>
+            <div class="form-group">
+                <label for="nickname">Nickname:</label>
+                <input type="text" n:name="nickname" id="nickname" required>
+            </div><br>
+            <h2 class="white">Functional</h2>
+            <div class="form-group">
+                <label for="username">Pick a username:</label>
+                <input type="text" n:name="username" id="username" required>
+            </div><br>
+            <div class="form-group">
+                <label for="email">Your e-mail:</label>
+                <input type="email" n:name="email" id="email" required>
+            </div><br>
+            <div class="form-group">
+                <label for="phone">Phone:</label>
+                <input type="text" n:name="phone" id="phone" required>
+            </div><br>
+            <div class="form-group">
+                <label for="password">Create a password:</label>
+                <input type="password" n:name="password" id="password" required>
+            </div><br><br><br>
+            <div class="form-group">
+                <button type="submit" n:name="send">Sign up</button>
+            </div>
+        </div>
     </div>
 </form>
+<h4 class="centered_title white"><a n:href="in">Already have an account? Log in.</a></h4>
 
 
 </div>

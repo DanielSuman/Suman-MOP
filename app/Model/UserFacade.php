@@ -23,7 +23,17 @@ final class UserFacade implements Nette\Security\Authenticator
 		ColumnName = 'username',
 		ColumnPasswordHash = 'password',
 		ColumnEmail = 'email',
-		ColumnRole = 'role';
+		ColumnRole = 'role',
+		ColumnNickname = 'nickname',
+		ColumnFirstname = 'firstname',
+		ColumnMiddlename = 'middlename',
+		ColumnLastname = 'lastname',
+		ColumnPhone = 'phone',
+		ColumnCountry = 'country',
+		ColumnRegion = 'region',
+		ColumnCity = 'city',
+		ColumnStreet = 'street',
+		ColumnZipcode = 'zipcode';
 
 	// Dependency injection of database explorer and password utilities
 	public function __construct(
@@ -66,8 +76,22 @@ final class UserFacade implements Nette\Security\Authenticator
 	 * Add a new user to the database.
 	 * Throws a DuplicateNameException if the username is already taken.
 	 */
-	public function add(string $username, string $email, string $password): void
-	{
+	public function add(
+		string $username,
+		string $email,
+		string $password,
+		string $nickname,
+		string $firstname,
+		string $middlename,
+		string $lastname,
+		string $phone,
+		string $country,
+		string $region,
+		string $city,
+		string $street,
+		string $zipcode,
+		string $role
+	): void {
 		// Validate the email format
 		Nette\Utils\Validators::assert($email, 'email');
 
@@ -75,8 +99,19 @@ final class UserFacade implements Nette\Security\Authenticator
 		try {
 			$this->database->table(self::TableName)->insert([
 				self::ColumnName => $username,
-				self::ColumnPasswordHash => $this->passwords->hash($password),
 				self::ColumnEmail => $email,
+				self::ColumnPasswordHash => $this->passwords->hash($password),
+				self::ColumnNickname => $nickname,
+				self::ColumnFirstname => $firstname,
+				self::ColumnMiddlename => $middlename,
+				self::ColumnLastname => $lastname,
+				self::ColumnPhone => $phone,
+				self::ColumnCountry => $country,
+				self::ColumnRegion => $region,
+				self::ColumnCity => $city,
+				self::ColumnStreet => $street,
+				self::ColumnZipcode => $zipcode,
+				self::ColumnRole => $role,
 			]);
 		} catch (Nette\Database\UniqueConstraintViolationException $e) {
 			throw new DuplicateNameException;
@@ -91,43 +126,42 @@ final class UserFacade implements Nette\Security\Authenticator
 		return $user;
 	}
 
-    public function getAll()
-    {
-        return $this->database->table('users')->fetchAll();
-    }
+	public function getAll()
+	{
+		return $this->database->table('users')->fetchAll();
+	}
 
 	public function insertUser($data)
-    {
-        $user = $this->database
-            ->table('users')
-            ->insert($data);
+	{
+		$user = $this->database
+			->table('users')
+			->insert($data);
 
-        return $user;
-    }
+		return $user;
+	}
 
-    public function editUser($id, $data)
-    {
-        $user = $this->database
-            ->table('users')
-            ->get($id);
-        $user->update($data);
-        return $user;
-    }
+	public function editUser($id, $data)
+	{
+		$user = $this->database
+			->table('users')
+			->get($id);
+		$user->update($data);
+		return $user;
+	}
 
-    public function deleteUser($id)
-    {
-        $user = $this->database
-            ->table('users')
-            ->get($id);
-    
-        if ($user) {
-            $user->delete();
-            return true; // Return true to indicate successful deletion
-        }
-    
-        return false; // Return false if the mod was not found
-    }
+	public function deleteUser($id)
+	{
+		$user = $this->database
+			->table('users')
+			->get($id);
 
+		if ($user) {
+			$user->delete();
+			return true; // Return true to indicate successful deletion
+		}
+
+		return false; // Return false if the mod was not found
+	}
 }
 
 

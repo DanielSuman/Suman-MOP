@@ -73,9 +73,7 @@ final class SignUpFormFactory
 		$form->addText('zipcode', 'Zip Code:')
 			->setRequired('PLease choose your zip (postal) code.');
 
-		$form->addText('role', 'Role:')
-			->setRequired('PLease choose your role.');
-
+		$form->addText('role', 'Role:')->setDefaultValue('NULL');
 
 		$form->addSubmit('send', 'Sign up');
 
@@ -109,5 +107,4 @@ final class SignUpFormFactory
 
 		return $form;
 	}
-
 }
