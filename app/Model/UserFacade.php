@@ -142,12 +142,25 @@ final class UserFacade implements Nette\Security\Authenticator
 
 	public function editUser($id, $data)
 	{
-		$user = $this->database
-			->table('users')
-			->get($id);
+		$user = $this->database->table('users')->get($id);
+	
+		// Check if the user exists
+		if (!$user) {
+			throw new \Exception('User not found');
+		}
+	
+		// Check if the password needs to be hashed and updated
+		if (!empty($data['password'])) {
+			$data[self::ColumnPasswordHash] = $this->hashPassword($data['password']);
+		} else {
+			unset($data[self::ColumnPasswordHash]); // Do not update password if not provided
+		}
+	
+		// Update user data
 		$user->update($data);
 		return $user;
 	}
+
 
 	public function deleteUser($id)
 	{
@@ -161,6 +174,11 @@ final class UserFacade implements Nette\Security\Authenticator
 		}
 
 		return false; // Return false if the mod was not found
+	}
+
+	public function hashPassword(string $password): string
+	{
+		return $this->passwords->hash($password);
 	}
 }
 

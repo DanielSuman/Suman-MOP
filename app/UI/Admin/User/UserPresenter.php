@@ -90,9 +90,9 @@ final class UserPresenter extends Nette\Application\UI\Presenter
         $form->addText('username', 'Username:')
             ->setRequired();
         $form->addText('email', 'Email:')
-            ->setRequired(); /*
+            ->setRequired();
         $form->addPassword('password', 'Password:')
-            ->setRequired(); */
+            ->setRequired();
         $form->addText('phone', 'Phone:')
             ->setRequired();
         $form->addText('country', 'Country:')
@@ -125,37 +125,24 @@ final class UserPresenter extends Nette\Application\UI\Presenter
     private function userFormSucceeded($form, $data): void
     {
         $id = $this->getParameter('id');
-        /*
-        if (filesize($data->image) > 0) {
-            if ($data->image->isOk()) {
-                // Extract the file extension
-                $extension = pathinfo($data->image->getSanitizedName(), PATHINFO_EXTENSION);
-
-                // Define the new file name as "thumbnail" with the original extension
-                $newFileName = 'thumbnail.' . $extension;
-
-                // Define the upload path
-                $uploadPath = 'upload/posts/' . $id . '/' . $newFileName;
-
-                // Move the uploaded file to the new location with the new file name
-                $data->image->move($uploadPath);
-
-                // Update the image path in the $data array
-                $data['image'] = $uploadPath;
-            } else {
-                $this->flashMessage('File was not added', 'failed');
-            }
-        } */
-
+    
+        // Only hash and set the password if it was provided
+        if (!empty($data['password'])) {
+            $data['password'] = $this->facade->hashPassword($data['password']);
+        } else {
+            unset($data['password']); // Remove it if not set
+        }
+    
         if ($id) {
             $user = $this->facade->editUser($id, (array) $data);
         } else {
             $user = $this->facade->insertUser((array) $data);
         }
-
+    
         $this->flashMessage('User was created successfully.', 'success');
         $this->redirect('User:show', $user->id);
     }
+    
 
     public function renderEdit(int $id): void
     {
