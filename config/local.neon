@@ -2,3 +2,12 @@ database:
 	dsn: 'mysql:host=127.0.0.1;dbname=quickstart'
 	user: root
 	password: root
+mail:
+	# použije SmtpMailer
+	smtp: true       # (bool) výchozí je false
+
+	host: 192.168.1.254        # (string)
+	port: 25        # (int)
+	username: ''    # (string)
+	password: ''    # (string)
+#	encryption: 'ssl'

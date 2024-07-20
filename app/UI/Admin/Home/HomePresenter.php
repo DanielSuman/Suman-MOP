@@ -6,6 +6,7 @@ namespace App\UI\Admin\Home;
 
 use Nette;
 use App\Model\PostFacade;
+use App\Services\MailManager;
 use Ublaboo\DataGrid\DataGrid;
 
 
@@ -13,6 +14,7 @@ final class HomePresenter extends Nette\Application\UI\Presenter
 {
     public function __construct(
         private PostFacade $facade,
+        private MailManager $mailManager,
     ) {
     }
 
@@ -29,6 +31,10 @@ final class HomePresenter extends Nette\Application\UI\Presenter
         if (!$this->getUser()->isInRole('admin') && !$this->getUser()->isInRole('moderator')) {
             $this->redirect(':Front:Home:'); // redirect to the front module
         }
+    }
+
+    public function renderDefault() {
+        $this->mailManager->sendNewsLetter(['daniel.suman@student.ossp.cz']);
     }
     
 }

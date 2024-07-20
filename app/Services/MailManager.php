@@ -7,17 +7,31 @@ use Latte\Runtime\Template;
 use Nette\Mail\Mailer;
 use Nette\Mail\Message;
 use Nette\Mail\SendmailMailer;
+use Nette\Mail\SmtpMailer;
 
 class MailManager implements IMailManager 
 {   
     private Mailer $mailer;
     public function __construct(Mailer $mailer)
     {
+        /*
+        $this->mailer = new SmtpMailer(
+            host: '192.168.1.254',
+            port: '25',
+            username: '',
+            password: '',
+            //encryption: 'ssl',
+        );*/
         $this->mailer = $mailer;
     }
     public function send(Message $email): void 
     {
-        $this->mailer->send($email);
+        try {
+            $this->mailer->send($email);
+        } catch (\Throwable $th) {
+            //throw $th;
+        }
+        
     }
     public function sendNewsLetter(iterable $recipients): void 
     {
@@ -31,7 +45,7 @@ class MailManager implements IMailManager
         foreach ($recipients as $recipient) {
             $email->addTo($recipient);
             $this->send($email);
-            $email->clearAttachments();
+            //$email->clearAttachments();
         }
     }
 }

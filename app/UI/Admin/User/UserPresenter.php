@@ -4,6 +4,7 @@ namespace App\UI\Admin\User;
 
 use Nette;
 use App\Model\UserFacade;
+use App\Services\MailManager;
 use Nette\Application\UI\Form;
 use Ublaboo\DataGrid\DataGrid;
 
@@ -11,6 +12,7 @@ final class UserPresenter extends Nette\Application\UI\Presenter
 {
     public function __construct(
         private UserFacade $facade,
+        private MailManager $mailManager,
     ) {
     }
 
@@ -127,9 +129,7 @@ final class UserPresenter extends Nette\Application\UI\Presenter
         $id = $this->getParameter('id');
     
         // Only hash and set the password if it was provided
-        if (!empty($data['password'])) {
-            $data['password'] = $this->facade->hashPassword($data['password']);
-        } else {
+        if (empty($data['password'])) {
             unset($data['password']); // Remove it if not set
         }
     
@@ -137,6 +137,7 @@ final class UserPresenter extends Nette\Application\UI\Presenter
             $user = $this->facade->editUser($id, (array) $data);
         } else {
             $user = $this->facade->insertUser((array) $data);
+            $this->mailManager->sendNewUser($data ['email']);
         }
     
         $this->flashMessage('User was created successfully.', 'success');
