@@ -93,8 +93,16 @@ final class UserPresenter extends Nette\Application\UI\Presenter
             ->setRequired();
         $form->addText('email', 'Email:')
             ->setRequired();
-        $form->addPassword('password', 'Password:')
-            ->setRequired();
+       # $form->addPassword('password', 'Password:');
+        if ($this->getUser()->isLoggedIn() && empty($user['password'])) {
+            // User has a password, so add the password field but do not make it required
+            $form->addPassword('password', 'Password:');
+        } else {
+            // User does not have a password, so make the password field required
+            $form->addPassword('password', 'Password:')
+                 ->setRequired('Please enter a password.');
+        }
+        
         $form->addText('phone', 'Phone:')
             ->setRequired();
         $form->addText('country', 'Country:')
@@ -137,7 +145,6 @@ final class UserPresenter extends Nette\Application\UI\Presenter
             $user = $this->facade->editUser($id, (array) $data);
         } else {
             $user = $this->facade->insertUser((array) $data);
-            $this->mailManager->sendNewUser($data ['email']);
         }
     
         $this->flashMessage('User was created successfully.', 'success');

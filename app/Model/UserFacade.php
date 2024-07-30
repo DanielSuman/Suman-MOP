@@ -144,6 +144,7 @@ final class UserFacade implements Nette\Security\Authenticator
 			->table('users')
 			->insert($data);
 
+		$this->mailManager->sendNewUserWelcome($data ['email']);
 		return $user;
 	}
 

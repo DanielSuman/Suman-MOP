@@ -33,8 +33,4 @@ final class HomePresenter extends Nette\Application\UI\Presenter
         }
     }
 
-    public function renderDefault() {
-        $this->mailManager->sendNewsLetter(['daniel.suman@student.ossp.cz']);
-    }
-    
 }
