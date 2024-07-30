@@ -21,30 +21,25 @@
         <div class="show_item_date">Created on <strong>{$mod->created_at|date:'D. F j, Y'} | {$mod->mod_category}</strong></div>
     </div>
     
-
-
-
-        {if $user->isLoggedIn()}
-        <h2>Comment on this post</h2>
-
-        {control commentForm}
-        {/if}
-
         <h2>Comments Section</h2>
 
     <div class="comments">
-        <p>
+        {if $user->isLoggedIn()}
+        <h2>Comment on this post as {$user->getIdentity()->nickname}</h2>
+        {control commentForm}
+        {/if}
         {foreach $comments as $comment}
-            {if $user->isLoggedIn() && ($user->id === $comment->user_id || $user->isInRole('admin') || $user->isInRole('moderator'))}
-                <a n:href="deleteComment! $comment->id" class="btn btn-danger">Delete</a>
-            {/if}
+        <div class="comment-box">
+            
             <p><b><a href="mailto:{$comment->email}" n:tag-if="$comment->email">
                 {$comment->name}
             </a></b> wrote:</p>
 
             <div>{$comment->content}</div>
-
+            {if $user->isLoggedIn() && ($user->id === $comment->user_id || $user->isInRole('admin') || $user->isInRole('moderator'))}
+                <a n:href="deleteComment! $comment->id" class="btn btn-danger">Delete</a>
+            {/if}
+        </div>
         {/foreach}
-        </p>
-    </div>
+    </div><br>
 </div>
