@@ -6,8 +6,8 @@ mail:
 	# použije SmtpMailer
 	smtp: true       # (bool) výchozí je false
 
-	host: 192.168.1.254        # (string)
-	port: 25        # (int)
-	username: ''    # (string)
-	password: ''    # (string)
-#	encryption: 'ssl'
+	host: 'smtp.seznam.cz'       # (string)
+	port: 465        # (int)
+	username: 'tempmail.zabbix@seznam.cz'    # (string)
+	password: '23072004Ds'    # (string)
+	encryption: 'ssl'

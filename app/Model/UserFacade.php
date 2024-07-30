@@ -6,6 +6,7 @@ namespace App\Model;
 
 use Nette;
 use Nette\Security\Passwords;
+use App\Services\MailManager;
 
 
 /**
@@ -39,6 +40,7 @@ final class UserFacade implements Nette\Security\Authenticator
 	public function __construct(
 		private Nette\Database\Explorer $database,
 		private Passwords $passwords,
+		private MailManager $mailManager,
 	) {
 	}
 
@@ -113,6 +115,11 @@ final class UserFacade implements Nette\Security\Authenticator
 				self::ColumnZipcode => $zipcode,
 				self::ColumnRole => $role,
 			]);
+
+		// Send a notification email to the new user
+		$this->mailManager->sendNewUserWelcome([$email]); // Pass the email as an array
+		$this->mailManager->sendNewUserCreated(['daniel.suman@student.ossp.cz']); // Pass the email as an array
+
 		} catch (Nette\Database\UniqueConstraintViolationException $e) {
 			throw new DuplicateNameException;
 		}
@@ -169,11 +176,19 @@ final class UserFacade implements Nette\Security\Authenticator
 			->get($id);
 
 		if ($user) {
+			// Get user's email
+			$email = $user[self::ColumnEmail];
+			
+			// Attempt to delete the user
 			$user->delete();
+
+			// Send a notification email after successful deletion
+			$this->mailManager->sendAccountDeletionNotification([$email]);
+
 			return true; // Return true to indicate successful deletion
 		}
 
-		return false; // Return false if the mod was not found
+		return false; // Return false if the user was not found
 	}
 
 	public function hashPassword(string $password): string

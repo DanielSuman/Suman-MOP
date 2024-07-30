@@ -1,4 +1,4 @@
-<?php 
+<?php
 
 namespace App\Services;
 
@@ -9,8 +9,8 @@ use Nette\Mail\Message;
 use Nette\Mail\SendmailMailer;
 use Nette\Mail\SmtpMailer;
 
-class MailManager implements IMailManager 
-{   
+class MailManager implements IMailManager
+{
     private Mailer $mailer;
     public function __construct(Mailer $mailer)
     {
@@ -24,23 +24,73 @@ class MailManager implements IMailManager
         );*/
         $this->mailer = $mailer;
     }
-    public function send(Message $email): void 
+    public function send(Message $email): void
     {
         try {
             $this->mailer->send($email);
         } catch (\Throwable $th) {
             //throw $th;
         }
-        
     }
-    public function sendNewsLetter(iterable $recipients): void 
+    public function sendNewsLetter(iterable $recipients): void
     {
         $email = new Message();
 
-        $email->setFrom('abc@abc.abc')
+        $email->setFrom('tempmail.zabbix@seznam.cz')
             ->setSubject('Nwesletter')
             ->setHtmlBody('<p>Content</p>');
-            
+
+
+        foreach ($recipients as $recipient) {
+            $email->addTo($recipient);
+            $this->send($email);
+            //$email->clearAttachments();
+        }
+    }
+    public function sendNewUserCreated(iterable $recipients): void
+    {
+        $template = __DIR__ . '/templates/newusercreated.latte';
+        $template = file_get_contents($template);
+
+        $email = new Message();
+
+        $email->setFrom('tempmail.zabbix@seznam.cz')
+            ->setSubject('A New Account Has Been Created')
+            ->setHtmlBody($template);
+
+        foreach ($recipients as $recipient) {
+            $email->addTo($recipient);
+            $this->send($email);
+            //$email->clearAttachments();
+        }
+    }
+    public function sendNewUserWelcome(iterable $recipients): void
+    {
+        $template = __DIR__ . '/templates/welcome.latte';
+        $template = file_get_contents($template);
+
+        $email = new Message();
+
+        $email->setFrom('tempmail.zabbix@seznam.cz')
+            ->setSubject('Welcome to Left 4 Dead Modding Community!')
+            ->setHtmlBody($template);
+
+        foreach ($recipients as $recipient) {
+            $email->addTo($recipient);
+            $this->send($email);
+            //$email->clearAttachments();
+        }
+    }
+    public function sendAccountDeletionNotification(iterable $recipients)
+    {
+        $template = __DIR__ . '/templates/AccountDeletionNotification.latte';
+        $template = file_get_contents($template);
+
+        $email = new Message();
+
+        $email->setFrom('tempmail.zabbix@seznam.cz')
+            ->setSubject('Account Deletion Notice')
+            ->setHtmlBody($template);
 
         foreach ($recipients as $recipient) {
             $email->addTo($recipient);
